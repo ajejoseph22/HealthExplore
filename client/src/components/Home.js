@@ -15,8 +15,6 @@ const Home = (props) => {
   const [searchValue, setSearchValue] = React.useState("");
   const [value] = useDebounce(searchValue, 1000);
 
-  const [loading, setLoading] = React.useState(false);
-
   const queries = useQuery();
 
   const q = queries.get("q");
@@ -27,11 +25,8 @@ const Home = (props) => {
   const experience = queries.get("experience");
 
   const fetchJobs = React.useCallback(() => {
-    setLoading(true);
-
     services.getJobs(q, location, department, role, experience).then((res) => {
       setJobs([...res]);
-      setLoading(false);
     });
   }, [q, location, department, role, experience]);
 
