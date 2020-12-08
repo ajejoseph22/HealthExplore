@@ -3,6 +3,7 @@ import "tailwindcss/tailwind.css";
 
 import { Provider } from 'react-redux'
 import { useStore } from '../store'
+import 'antd/dist/antd.css';
 
 // let store = createStore(projectReducer);
 

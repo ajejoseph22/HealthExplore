@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveFilter } from '../actions';
+import styles from '../styles/Commons.module.css';
 
 export default function FilterBlock({ filterObject }) {
     const dispatch = useDispatch();
@@ -16,8 +17,8 @@ export default function FilterBlock({ filterObject }) {
         }
         return <FilterItem key={filter.key} isActive={isActive} setFilter={setFilter} filterItem={filter} />
     });
-    return <div>
-        <span>{_.startCase(filterObject.name.replace('_', ' '))}</span>
+    return <div className={`${styles.filterBlock} ${styles.boxShadow}`}>
+        <span className={`${styles.filterBlockHeading}`}>{_.startCase(filterObject.name.replace('_', ' '))}</span>
         <ul>
             {filterItems}
         </ul>
@@ -28,7 +29,7 @@ export default function FilterBlock({ filterObject }) {
 function FilterItem({ filterItem, isActive, setFilter }) {
     return <li style={{
         color: isActive ? 'blue' : ''
-    }} onClick={e => setFilter(filterItem)}>{filterItem.key} ({filterItem.doc_count})</li>
+    }} className={styles.filterItem} onClick={e => setFilter(filterItem)}>{filterItem.key} ({filterItem.doc_count})</li>
 }
 
 function showMore({filterObject}) {

@@ -1,13 +1,16 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import commonStyles from '../styles/Commons.module.css';
 
 import * as config from '../config';
 
-import * as Actions from '../actions';
-import { useState } from 'react-redux';
-
 import LeftSidebar from '../components/LeftSidebar';
 import Search from '../components/Search';
+
+import { Collapse, Dropdown, Menu } from 'antd';
+import JobsHeader from '../components/JobsHeader';
+import JobsListings from '../components/JobsListings';
+
 
 export async function getStaticProps() {
   let filters = {};
@@ -40,10 +43,24 @@ export async function getStaticProps() {
 }
 
 export default function Home({ initialReduxState }) {
+  
+
   return (
-    <div>
+    <div className={commonStyles.jobsWrapper}>
       <Search />
-      <LeftSidebar />
+      <div className={commonStyles.jobsContentWrapper}>
+          <div className={`${commonStyles.leftJobPanel}`}>
+            <LeftSidebar />
+          </div>
+          <div className={`${commonStyles.rightJobPanel} ${commonStyles.boxShadow}`}>
+              <div className={commonStyles.rightPanel__header}>
+                <JobsHeader />
+              </div>
+              <div className={commonStyles.jobsListings}>
+                 <JobsListings />
+              </div>
+          </div>
+      </div>
     </div>
   )
 }

@@ -1,0 +1,78 @@
+.jobsWrapper {
+    background: #f5f5f5;
+}
+.searchWrapper {
+    position: relative;
+    padding: 15px;
+}
+.searchWrapper input{
+    height: 42px;
+    border-radius: 4px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    width: 100%;
+}
+.jobsContentWrapper {
+    display: flex;
+}
+
+.leftJobPanel {
+    width: 300px;
+    padding: 0 16px;
+}
+.rightJobPanel {
+    width: calc( 100% - 325px );
+    padding: 10px;
+    background: #fff;
+    margin-left: 10px;
+}
+.boxShadow {
+    box-shadow: 0 0 1px 0 rgba(0,0,0,.2);
+}
+
+/* filte block  */
+.filterBlock {
+    background: #fff;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+.filterBlockHeading {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+/* .rightJobPanel */
+.rightPanel__header {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.rightPanel__headerLeft {
+    font-weight: 600;
+}
+.rightPanel__headerRight {
+    display: flex;
+}
+.rightPanel__headerRight > span{
+     color: #ccc;
+     margin-right: 20px;
+     display: inline-block;
+}
+.rightPanel__headerRight ul {
+    display: flex;
+}
+.rightPanel__headerRight li {
+     margin-right: 20px;
+     cursor: pointer;
+}
+
+.jobsListings {
+    padding: 10px;
+}
+
+.filterItem {
+    cursor: pointer;
+}
