@@ -4,10 +4,11 @@ import { Collapse, Dropdown, Menu } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMemo } from 'react';
 
+
 function menu(name, onClick) {
     return <Menu onClick={key => onClick(key)}>
         <Menu.Item key="none">
-        {name}
+            <span className={commonStyles.dropdownFirstOption} >{name}</span>
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item key="asc">

@@ -1,0 +1,14 @@
+.ant-collapse {
+    background-color: transparent;
+    border: none;
+}
+.ant-collapse > .ant-collapse-item {
+    border: none;
+}
+.ant-collapse > .ant-collapse-item > .ant-collapse-header {
+    position: relative;
+    padding: 10px 50px;
+}
+.ant-collapse > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow {
+    top: 8px !important;
+}
