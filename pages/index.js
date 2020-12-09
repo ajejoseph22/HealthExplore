@@ -7,12 +7,13 @@ import * as config from '../config';
 import LeftSidebar from '../components/LeftSidebar';
 import Search from '../components/Search';
 
+
 import { Collapse, Dropdown, Menu } from 'antd';
 import JobsHeader from '../components/JobsHeader';
 import JobsListings from '../components/JobsListings';
 
 import { fetchFilters } from '../actions';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 
@@ -40,6 +41,7 @@ export async function getStaticProps() {
 }
 
 export default function Home({ initialReduxState }) {
+  const [showSidebar, setShowSidebar] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchFilters());
@@ -47,9 +49,9 @@ export default function Home({ initialReduxState }) {
 
   return (
     <div className={commonStyles.jobsWrapper}>
-      <Search />
+      <Search setShowSidebar={setShowSidebar} showSidebar={showSidebar} />
       <div className={commonStyles.jobsContentWrapper}>
-          <div className={`${commonStyles.leftJobPanel} ${commonStyles.active}`}>
+          <div className={`${commonStyles.leftJobPanel} ${showSidebar ? commonStyles.active: ''}`}>
             <LeftSidebar />
           </div>
           <div className={`${commonStyles.rightJobPanel} ${commonStyles.boxShadow}`}>
