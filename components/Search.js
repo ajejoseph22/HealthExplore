@@ -6,7 +6,7 @@ import { setSearchText, searchJobsWithFilter, searchForJobsUsingSagas } from '..
 import _ from 'lodash';
 import styles from '../styles/Commons.module.css';
 
-import { MenuOutlined } from '@ant-design/icons';
+import { MenuOutlined, CloseOutlined } from '@ant-design/icons';
 
 
 export default function Search(props) {
@@ -27,7 +27,7 @@ export default function Search(props) {
         props.setShowSidebar(!props.showSidebar);
     }
     return <>
-        <div className={styles.desktopHideMenuIcon} onClick={openMenu}><MenuOutlined /></div>
+        <div className={styles.desktopHideMenuIcon} onClick={openMenu}>{props.showSidebar ? <CloseOutlined /> : <MenuOutlined />} </div>
         <div className={styles.searchWrapper}>
             <input type="text" value={searchText} onChange={onChangeSearchText} onKeyDown={onKeyDown} placeholder={'search for any job, title, keywords or company'}></input>
             <span></span>
