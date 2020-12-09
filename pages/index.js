@@ -49,7 +49,7 @@ export default function Home({ initialReduxState }) {
     <div className={commonStyles.jobsWrapper}>
       <Search />
       <div className={commonStyles.jobsContentWrapper}>
-          <div className={`${commonStyles.leftJobPanel}`}>
+          <div className={`${commonStyles.leftJobPanel} ${commonStyles.active}`}>
             <LeftSidebar />
           </div>
           <div className={`${commonStyles.rightJobPanel} ${commonStyles.boxShadow}`}>

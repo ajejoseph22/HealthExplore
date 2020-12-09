@@ -139,3 +139,45 @@
 .rightData button {
     margin-bottom: 10px;
 }
+
+.desktopHideMenuIcon {
+    display: none;
+}
+@media(max-width: 992px) {
+    .leftJobPanel {
+        position: fixed;
+        width: 300px;
+        left: -300px;
+        z-index: 11;
+        box-shadow: 2px 0px 5px 0 rgba(0,0,0,.2);
+        background: #fff;
+        padding: 0;
+        top: 74px;
+        transition: transform .3s ease;
+        transform: translateX(0);
+    }
+    .leftJobPanel.active {
+        transform: translateX(300px);
+    }
+    .rightJobPanel {
+        width: 100%;
+    }
+    .desktopHideMenuIcon {
+        display: inline-block;
+        position: absolute;
+        left: 9px;
+        top: 15px;
+        z-index: 11;
+        padding: 10px;
+        background: #ccc;
+        border-radius: 4px;
+        border: 1px solid #efefef;
+        width: 50px;
+    }
+    .searchWrapper {
+        padding-left: 70px;
+    }
+    .rightPanel__headerRight ul {
+        flex-wrap: wrap;
+    }
+}

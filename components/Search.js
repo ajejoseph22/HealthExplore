@@ -1,5 +1,5 @@
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setSearchText, searchJobsWithFilter, searchForJobsUsingSagas } from '../actions';
@@ -21,8 +21,11 @@ export default function Search() {
             dispatch(searchForJobsUsingSagas());
         }
     }
+    function openMenu() {
 
+    }
     return <>
+        <div className={styles.desktopHideMenuIcon} onClick={openMenu}>icon</div>
         <div className={styles.searchWrapper}>
             <input type="text" value={searchText} onChange={onChangeSearchText} onKeyDown={onKeyDown} placeholder={'search for any job, title, keywords or company'}></input>
             <span></span>
