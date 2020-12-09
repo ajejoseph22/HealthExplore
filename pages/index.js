@@ -64,3 +64,15 @@ export default function Home({ initialReduxState }) {
     </div>
   )
 }
+
+
+class ParentComp {
+
+}
+
+class smallComp {
+  state = {
+    isLoading: true
+  }
+
+}

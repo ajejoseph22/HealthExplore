@@ -7,13 +7,15 @@ import _ from 'lodash';
 const WordPos = require('wordpos');
 const wordpos = new WordPos();
 
+import { applyActiveFilters, applySearchfilter, applySortingModifiers } from '../../utils/jobFilteringUtils';
+
 export default async (req, res) => {
   res.statusCode = 200;
   // @todo: implement filters and search
-  console.log('working', req.headers['active_filters'], req.headers['sorting_modifiers']);
+  // console.log('working', req.headers['active_filters'], req.headers['sorting_modifiers']);
   const activeFilters = JSON.parse(req.headers['active_filters'] || JSON.stringify({}));
   const sortingModifiers = JSON.parse(req.headers['sorting_modifiers'] || JSON.stringify({}));
-  console.log(activeFilters, sortingModifiers);
+  // console.log(activeFilters, sortingModifiers);
   let searchItems = [];
   if (req.query.search && req.query.search.includes(" ")) {
     searchItems = await wordpos.getNouns(req.query.search);
@@ -27,7 +29,7 @@ export default async (req, res) => {
 
   if (req.query.search) {
     filteredJobs = applySearchfilter(filteredJobs, searchRegex);
-    console.log(filteredJobs.length)
+    // console.log(filteredJobs.length)
   }
 
   // apply activeFilters if any.
@@ -38,6 +40,14 @@ export default async (req, res) => {
   // apply sorting modifier.
   filteredJobs = applySortingModifiers(filteredJobs, sortingModifiers);
 
+  // Go through listings and see if length jobs inside those are zero, if there are don't show the listings.
+  filteredJobs = filteredJobs.filter(job => {
+    if (job.items && job.items.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  })
 
   // @todo: implement automated tests
 
@@ -51,67 +61,4 @@ export default async (req, res) => {
   });
 }
 
-function applySearchfilter(filteredJobs, searchRegex) {
-  filteredJobs = filteredJobs.filter(job => {
-    return searchRegex.test(job.job_title) || searchRegex.test(job.name);
-  });
-  filteredJobs.forEach(job => {
-    job.items = job.items.filter(jobDetail => {
-      return searchRegex.test(jobDetail.city) || searchRegex.test(jobDetail.job_type) || searchRegex.test(jobDetail.job_title);
-    });
-  });
-  return filteredJobs;
-}
-
-function applySortingModifiers(filteredJobs, sortingModifiers) {
-  for (let sortingField of Object.keys(sortingModifiers)) {
-    switch(sortingModifiers[sortingField]) {
-      case 'asc':
-        filteredJobs = applySortOnJobItems(filteredJobs, sortingField, 'asc');
-        break;
-      case 'desc':
-        filteredJobs = applySortOnJobItems(filteredJobs, sortingField, 'desc');
-        break;
-      default:
-    }
-  }
-  return filteredJobs;
-}
-
-function applySortOnJobItems(filteredJobs, sortKey, sortOrder) {
-  
-  let morphedSortKey = '';
-  switch(sortKey) {
-    case 'location':
-      morphedSortKey = 'city'
-      break;
-    default:
-      morphedSortKey = sortKey;
-  }
-
-  for (let job of filteredJobs) {
-    job.items = _.sortBy(job.items, item => item[morphedSortKey]);
-    // console.log(sortOrder, job.items[0].city);
-    if (sortOrder == 'desc') {
-      job.items.reverse();
-    }
-    // console.log(sortOrder, job.items[0].city);
-
-  }
-  return filteredJobs;
-}
-
-function applyActiveFilters(filteredJobs, activeFilters) {
-  filteredJobs.forEach(job => {
-    job.items.filter(item => {
-      for (let activeFilterKey of Object.keys(activeFilters)) {
-        if (activeFilters[activeFilterKey].includes(item[activeFilterKey])) {
-          return true;
-        }
-      }
-      return false;
-    });
-  });
-  return filteredJobs;
-}
 

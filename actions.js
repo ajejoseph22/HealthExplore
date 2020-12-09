@@ -5,11 +5,27 @@ export const setFilters = filters => ({
     filters
 });
 
-export const setActiveFilter = (filterKey, filterValue) => ({
-    type: 'filters/setActiveFilter',
-    filterKey,
-    filterValue
-});
+export const setActiveFilter = (filterKey, filterValue) => {
+    return async (dispatch) => {
+        dispatch({
+            type: 'filters/setActiveFilter',
+            filterKey,
+            filterValue
+        });
+        dispatch(searchForJobsUsingSagas());
+    }
+}
+
+export const setQueryModifiers = (modifierKey, modifierValue) => {
+    return async(dispatch) => {
+        dispatch({
+            type: 'queryModifiers/setQueryModifier',
+            modifierKey,
+            modifierValue
+        });
+        dispatch(searchForJobsUsingSagas());
+    };
+}
 
 export const setSearchText = searchText => ({
     type: 'search/setSearchText',

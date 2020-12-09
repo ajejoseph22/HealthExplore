@@ -8,9 +8,10 @@ function* fetchJobsWithFilter(action) {
     try {
         const activeFilters = yield select(state => state.ui.activeFilters);
         const sortingModifiers = yield select(state => state.ui.queryModifiers);
-        console.log('inside saga', activeFilters, sortingModifiers);
+        const searchKeyword = yield select(state => state.ui.searchText);
+        // console.log('inside saga', activeFilters, sortingModifiers);
         yield put(setJobsLoading(true));
-        let result = yield call(fetch, `${server}/api/jobs`, {
+        let result = yield call(fetch, `${server}/api/jobs?search=${searchKeyword}`, {
             method: "get",
             headers: {
                 'active_filters': JSON.stringify(activeFilters),

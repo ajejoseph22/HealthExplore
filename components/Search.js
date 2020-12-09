@@ -18,7 +18,6 @@ export default function Search() {
         if (e.key == 'Enter') {
             // do API call
             // dispatch(searchJobsWithFilter());
-            alert('ww');
             dispatch(searchForJobsUsingSagas());
         }
     }

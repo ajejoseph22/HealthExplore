@@ -5,6 +5,9 @@ const projectReducer = produce((draft, action) => {
         case 'jobs/set':
             draft.jobs = action.jobs;
             break;
+        case 'queryModifiers/setQueryModifier':
+            draft.ui.queryModifiers[action.modifierKey] = action.modifierValue;
+            break;
         case 'filters/setActiveFilter':
             if (draft.ui.activeFilters[action.filterKey]) {
                 if (draft.ui.activeFilters[action.filterKey].includes(action.filterValue)) {
