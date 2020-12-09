@@ -16,6 +16,20 @@ export const setActiveFilter = (filterKey, filterValue) => {
     }
 }
 
+export const fetchFilters = () => {
+    return async (dispatch) => {
+        let filters = {};
+        try {
+          const result = await fetch(`${server}/api/filters`);
+          filters = await result.json();
+          console.log(filters);
+          dispatch(setFilters(filters));
+        } catch (exc) {
+          console.log(exc);
+        }
+    };
+};
+
 export const setQueryModifiers = (modifierKey, modifierValue) => {
     return async(dispatch) => {
         dispatch({

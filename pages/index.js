@@ -11,20 +11,17 @@ import { Collapse, Dropdown, Menu } from 'antd';
 import JobsHeader from '../components/JobsHeader';
 import JobsListings from '../components/JobsListings';
 
+import { fetchFilters } from '../actions';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
 
 export async function getStaticProps() {
-  let filters = {};
-  try {
-    const result = await fetch(`${config.server}/api/filters`);
-    filters = await result.json();
-    // console.log(filters);
-  } catch (exc) {
-    console.log(exc);
-  }
+
   return {
     props: {
       initialReduxState: {
-        filters,
+        filters: {},
         jobs: [],
         ui: {
           searchText: '',
@@ -43,7 +40,10 @@ export async function getStaticProps() {
 }
 
 export default function Home({ initialReduxState }) {
-  
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchFilters());
+  }, []);
 
   return (
     <div className={commonStyles.jobsWrapper}>

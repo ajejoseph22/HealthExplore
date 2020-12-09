@@ -2,6 +2,9 @@ import produce from 'immer';
 
 const projectReducer = produce((draft, action) => {
     switch(action.type) {
+        case 'filters/set':
+            draft.filters = action.filters;
+            break;
         case 'jobs/set':
             draft.jobs = action.jobs;
             break;
