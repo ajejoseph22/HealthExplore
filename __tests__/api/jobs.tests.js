@@ -2,7 +2,6 @@
 import { createMocks } from 'node-mocks-http';
 import searchJobs from '../../pages/api/jobs';
 
-import { applyActiveFilters, applySearchfilter, applySortingModifiers } from '../../utils/jobFilteringUtils';
 
 describe('/api/jobs', () => {
 
@@ -30,9 +29,5 @@ describe('/api/jobs', () => {
 
         expect(res._getStatusCode()).toBe(200);
         expect(JSON.parse(res._getData()).jobs.length).toBe(3);
-    });
-
-    test('unit test job functionality', async () => {
-
     });
 });
