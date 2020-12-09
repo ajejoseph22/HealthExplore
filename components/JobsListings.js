@@ -9,7 +9,6 @@ import { Collapse, Dropdown, Menu, Button } from 'antd';
 const { Panel } = Collapse;
 
 function JobShortDescription(props) {
-  console.log('props', props.item);
   return <div>
       <div className={commonStyles.job_title} >{props.item.job_title}</div>
       <div className={commonStyles.job_less_detail}>

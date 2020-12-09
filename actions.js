@@ -66,9 +66,7 @@ export const searchJobsWithFilter = () => {
     return async (dispatch, getState) => {
         dispatch(setJobsLoading(false));
         const activeFilters = getState().ui.activeFilters;
-        console.log(activeFilters);
         const sortingModifiers = getState().ui.queryModifiers;
-        console.log(sortingModifiers);
         let result = await fetch(`${server}/api/jobs`);
         result = await result.json();
         console.log(result);

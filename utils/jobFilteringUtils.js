@@ -58,7 +58,6 @@ export function applySearchfilter(filteredJobs, searchRegex) {
   }
   
   export function applyActiveFilters(filteredJobs, activeFilters) {
-    console.log(activeFilters);
     filteredJobs.forEach(job => {
       job.items = job.items.filter(item => {
         for (let activeFilterKey of Object.keys(activeFilters)) {
