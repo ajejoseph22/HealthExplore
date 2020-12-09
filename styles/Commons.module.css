@@ -93,3 +93,49 @@
     align-items: center;
     font-weight: 400;
 }
+.job_title {
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+.job_less_detail > span {
+    padding: 0px 10px;
+    display: inline-block;
+    border-right: 2px solid #999;
+    line-height: 14px;
+    font-weight: 400;
+}
+.job_less_detail > span:first-child {
+    padding-left: 0;
+}
+.job_less_detail > span:last-child {
+    border-right: 0;
+}
+.jobMoreDetails {
+    padding: 15px 15px;
+}
+.jobDetailPanel {
+    display: flex;
+    justify-content: space-between;
+}
+.jobDetailPanel > div {
+    width: 70%;
+    margin-bottom: 15px;
+}
+
+.jobDetailPanel .title {
+    font-weight: 600;
+    width: 30%;
+}
+.rightData {
+    display: flex;
+    justify-content: space-between;
+}
+.rightData > div {
+    width: 60%;
+}
+.rightData > div:last-child {
+    width: 20%;
+}
+.rightData button {
+    margin-bottom: 10px;
+}

@@ -15,6 +15,9 @@ const projectReducer = produce((draft, action) => {
             if (draft.ui.activeFilters[action.filterKey]) {
                 if (draft.ui.activeFilters[action.filterKey].includes(action.filterValue)) {
                     draft.ui.activeFilters[action.filterKey] = draft.ui.activeFilters[action.filterKey].filter(filter => filter != action.filterValue);
+                    if (draft.ui.activeFilters[action.filterKey].length == 0) {
+                        delete draft.ui.activeFilters[action.filterKey];
+                    }
                 } else {
                     draft.ui.activeFilters[action.filterKey].push(action.filterValue);
                 }

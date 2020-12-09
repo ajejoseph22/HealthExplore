@@ -58,14 +58,18 @@ export function applySearchfilter(filteredJobs, searchRegex) {
   }
   
   export function applyActiveFilters(filteredJobs, activeFilters) {
+    console.log(activeFilters);
     filteredJobs.forEach(job => {
       job.items = job.items.filter(item => {
         for (let activeFilterKey of Object.keys(activeFilters)) {
-          if (activeFilters[activeFilterKey].length == 0) {
-            return true;
-          }
           if (activeFilters[activeFilterKey].includes(item[activeFilterKey])) {
             return true;
+          } else if (Array.isArray(item[activeFilterKey])) {
+            for (let itemKey of item[activeFilterKey]) {
+              if (activeFilters[activeFilterKey].includes(itemKey)) {
+                return true;
+              }
+            }
           }
         }
         return false;
