@@ -1,16 +1,27 @@
 import debounce from 'lodash/debounce'
 import { useEffect } from 'react'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 import Header from '#/components/Header'
 import Footer from '#/components/Footer'
 import Filters from '#/components/Filters'
 import JobList from '#/components/JobList'
 import SearchBar from '#/components/SearchBar'
+import { Types } from '#/store/actions/jobs'
 import type { Props } from './types'
 
-const Dashboard: React.FC<Props> = ({ keyword, selectedFilters, sort, getJobs }) => {
+const Dashboard: React.FC<Props> = ({ asyncStatus, keyword, selectedFilters, sort, getJobs }) => {
   useEffect(() => {
     loadData()
   }, [keyword, selectedFilters, sort])
+
+  useEffect(() => {
+    if (asyncStatus[Types.GET_JOBS] === 'request') {
+      NProgress.start()
+    } else {
+      NProgress.done()
+    }
+  }, [asyncStatus[Types.GET_JOBS]])
 
   const loadData = debounce(() => {
     getJobs()

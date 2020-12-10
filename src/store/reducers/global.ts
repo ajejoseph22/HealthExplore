@@ -1,6 +1,5 @@
 import { createReducer } from 'reduxsauce'
-import { success, failure } from '#/utils/actions'
-import { Types } from '#/store/actions/jobs'
+import { Types } from '#/store/actions/global'
 
 export const initialState = {
   status: {}

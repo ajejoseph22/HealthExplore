@@ -3,6 +3,7 @@ import { Creators } from '#/store/actions/jobs'
 import Dashboard from './Dashboard'
 
 const mapStateToProps = (state: Test.StoreState) => ({
+  asyncStatus: state.global.status,
   selectedFilters: state.jobs.selectedFilters,
   sort: state.jobs.sort,
   keyword: state.jobs.keyword
