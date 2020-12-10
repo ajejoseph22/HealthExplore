@@ -24,10 +24,11 @@ function* getFilters(action) {
 function* getJobs(action) {
   try {
     yield put(requestCreator(action.type, {}))
-    const { sort, selectedFilters: filter } = yield select(
+    const { keyword, sort, selectedFilters: filter } = yield select(
       (state: Test.StoreState) => state.jobs
     )
     const res = yield call(services.getJobs, {
+      keyword,
       sort,
       filter
     })
