@@ -1,7 +1,7 @@
 const Footer: React.FC = () => {
   return (
-    <footer className='grid grid-cols-4 p-6 gap-4 bg-white shadow-sm text-gray-600'>
-      <div className='col-span-2'>
+    <footer className='grid grid-cols-1 sm:grid-cols-4 p-6 gap-4 bg-white shadow-sm text-gray-600'>
+      <div className='sm:col-span-2'>
         <h3 className='text-black text-xl font-bold mb-2'>About us</h3>
         <p>
           We are a team of nurses, doctors, technologists and executives

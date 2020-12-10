@@ -35,25 +35,25 @@ export const JobItem: React.FC<JobItemProps> = ({ item }) => {
         </div>
       </div>
       {expanded && (
-        <div className='my-3 flex flex-row'>
-          <div className='grid grid-cols-3 gap-2'>
+        <div className='my-3 flex flex-col sm:flex-row'>
+          <div className='grid sm:grid-cols-3 gap-2'>
             <div className='font-bold'>Department:</div>
-            <div className='col-span-2'>{item.department.join(', ')}</div>
+            <div className='sm:col-span-2'>{item.department.join(', ')}</div>
             <div className='font-bold'>Hours / shifts</div>
-            <div className='col-span-2'>
+            <div className='sm:col-span-2'>
               {item.hours.join(', ')} / {item.work_schedule}
             </div>
             <div className='description'>Summary</div>
-            <div className='col-span-2'>{item.description}</div>
+            <div className='sm:col-span-2'>{item.description}</div>
           </div>
-          <div className='px-3 flex flex-col justify-center text-xs w-30 flex-shrink-0'>
+          <div className='px-3 flex flex-row sm:flex-col justify-center text-xs sm:w-30 flex-shrink-0'>
             <button
-              className='px-4 py-2 my-1 uppercase rounded-md bg-blue-500 text-white hover:text-opacity-80'
+              className='px-4 py-2 m-2 uppercase rounded-md bg-blue-500 text-white hover:text-opacity-80'
               onClick={toggleDetailModal}
             >
               Job details
             </button>
-            <button className='px-4 py-2 my-1 border border-blue-500 uppercase rounded-md text-blue-500 hover:text-opacity-80'>
+            <button className='px-4 py-2 m-2 border border-blue-500 uppercase rounded-md text-blue-500 hover:text-opacity-80'>
               Save job
             </button>
           </div>

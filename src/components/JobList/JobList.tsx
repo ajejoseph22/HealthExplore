@@ -34,12 +34,12 @@ const JobList: React.FC<JobListProps> = ({ className, jobs, sort, setSort }) => 
 
   return (
     <div className={cn('shadow-sm bg-white p-4', className)}>
-      <div className='flex justify-between h-12'>
+      <div className='flex flex-col md:flex-row md:justify-between md:h-12'>
         <div>
           <span className='font-bold'>{totalJobsCount.toLocaleString()}</span>{' '}
           job postings
         </div>
-        <div className='flex'>
+        <div className='flex my-3 md:my-0'>
           {SORT_OPTIONS.map((e) => (
             <SortButton key={e} option={e} state={sort[e]} onChange={setSort} />
           ))}

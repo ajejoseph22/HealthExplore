@@ -9,7 +9,7 @@ const Header: React.FC = () => {
         <span className='text-blue-500 font-bold'>HEALTH EXPLORE</span>
       </div>
 
-      <ul>
+      <ul className='hidden lg:block'>
         <a href='#' className={styles.link}>
           Profile
         </a>
