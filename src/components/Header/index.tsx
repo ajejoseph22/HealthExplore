@@ -28,11 +28,11 @@ const Header: React.FC = () => {
       </ul>
 
       <div className='flex flex-row'>
-        <button className='px-4 h-10 border border-blue-500 uppercase rounded-md text-blue-500 hover:text-opacity-80'>Create Job</button>
-        <button className="mx-4 bg-blue-500 w-10 h-10 rounded-full flex items-center justify-center text-white">
+        <button className='hidden sm:block px-4 h-10 border border-blue-500 uppercase rounded-md text-blue-500 hover:text-opacity-80'>Create Job</button>
+        <button className="sm:mx-4 bg-blue-500 w-10 h-10 rounded-full flex items-center justify-center text-white">
           <span>JO</span>
         </button>
-        <button className='h-10 hover:text-opacity-80'>LOGOUT</button>
+        <button className='hidden sm:block h-10 hover:text-opacity-80'>LOGOUT</button>
       </div>
     </header>
   )

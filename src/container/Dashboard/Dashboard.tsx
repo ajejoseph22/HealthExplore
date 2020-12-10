@@ -21,7 +21,7 @@ const Dashboard: React.FC<Props> = ({ keyword, selectedFilters, sort, getJobs })
       <Header />
       <SearchBar className='mt-3 mx-3' />
       <div className='flex flex-col-reverse lg:flex-row px-3'>
-        <Filters className='mr-3 flex-shrink-0 w-100' />
+        <Filters className='lg:mr-3 flex-shrink-0 w-100' />
         <JobList className='flex-grow my-3' />
       </div>
       <Footer />
