@@ -5,7 +5,6 @@ import { useState } from 'react';
 import Head from 'next/head'
 
 //Components
-import NavBar from '../components/navigation/NavBar';
 import SearchBar from '../components/search/SarchBar';
 
 export default function Home() {
@@ -13,13 +12,11 @@ export default function Home() {
   const [searchInput, setSearchInput] = useState('');
 
   return (
-    <div className={`bg-gray-50 min-h-screen w-full`}>
+    <div className={`min-h-screen w-full`}>
       <Head>
         <title>Fullstack Candidate Testing</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <NavBar />
 
       <div className={'p-6 md:p-0 md:mt-px'}>
         <SearchBar
