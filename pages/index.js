@@ -8,8 +8,9 @@ import fetch from 'node-fetch'
 //Components
 import SearchBar from '../components/search/SarchBar';
 import FilterCard from '../components/navigation/FilterCard';
+import JobList from '../components/jobs/JobList';
 
-function Home({ filters }) {
+function Home({ filters, jobs }) {
   //State
   const [searchInput, setSearchInput] = useState('');
 
@@ -28,8 +29,8 @@ function Home({ filters }) {
         />
       </div>
 
-      <div className={`flex w-full`}>
-        <div className={'flex flex-col space-y-4 w-1/3 p-6 sm:hidden'}>
+      <div className={`flex w-full md:mt-6 sm:mt-px`}>
+        <div className={'flex flex-col space-y-4 w-1/3 p-6 pt-0 sm:hidden'}>
           {filters && Object.keys(filters).length > 0 ?
             Object.keys(filters).map((item, index) => (
               <FilterCard
@@ -41,8 +42,10 @@ function Home({ filters }) {
             : false
           }
         </div>
-        <div className={'flex w-2/3 p-6 sm:w-full'}>
-          <p>{JSON.stringify(filters)}</p>
+        <div className={'flex w-2/3 p-6 pt-0 sm:w-full sm:p-0'}>
+          <JobList
+            data={jobs.jobs}
+          />
         </div>
       </div>
 
@@ -52,11 +55,14 @@ function Home({ filters }) {
 
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await fetch(`http://localhost:3000/api/filters`)
-  const filters = await res.json()
+  const filtersRes = await fetch(`http://localhost:3000/api/filters`)
+  const filters = await filtersRes.json()
+
+  const jobsRes = await fetch('http://localhost:3000/api/jobs')
+  const jobs = await jobsRes.json()
 
   // Pass data to the page via props
-  return { props: { filters } }
+  return { props: { filters, jobs } }
 }
 
 export default Home;
