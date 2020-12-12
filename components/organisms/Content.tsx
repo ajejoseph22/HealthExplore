@@ -1,10 +1,10 @@
-import { IMainProps } from "../../types";
+import { IMainProps, SORT_OPTIONS } from "../../types";
 import JobsGroup from "./JobsGroup";
 
 
-const SortLink = ({ children }) => {
+const SortLink = ({ children, ...props }) => {
   return (
-    <a className='text-sm mx-2 cursor-pointer hover:text-blue-500'>
+    <a className='text-sm mx-2 cursor-pointer hover:text-blue-500' {...props}>
       {children}
     </a>
   )
@@ -21,11 +21,11 @@ const Content = ({
         </div>
         <div className='flex'>
           <p className='text-gray-500 text-sm mx-2'>Sort by</p>
-          <SortLink>Location</SortLink>
-          <SortLink>Role</SortLink>
-          <SortLink>Department</SortLink>
-          <SortLink>Education</SortLink>
-          <SortLink>Experience</SortLink>
+          <SortLink data-sort-option={SORT_OPTIONS.LOCATION}>Location</SortLink>
+          <SortLink data-sort-option={SORT_OPTIONS.ROLE}>Role</SortLink>
+          <SortLink data-sort-option={SORT_OPTIONS.DEPARTMENT}>Department</SortLink>
+          <SortLink data-sort-option={SORT_OPTIONS.EDUCATION}>Education</SortLink>
+          <SortLink data-sort-option={SORT_OPTIONS.EXPERIENCE}>Experience</SortLink>
         </div>
       </div>
       <ul className='mt-5 divide-y divide-gray-200 divide-opacity-80'>

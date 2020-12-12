@@ -1,4 +1,4 @@
-import { IHomeState, IHomeActionTypes, IHomeReducerActionType } from "../types";
+import { IHomeState, IHomeActionTypes, IHomeReducerActionType, IMainProps } from "../types";
 
 export const INITIAL_STATE: IHomeState = {
   jobs: [],
@@ -16,6 +16,13 @@ export const INITIAL_STATE: IHomeState = {
     department: [],
     experience: [],
     work_schedule: [],
+  }
+}
+
+export const initialStateWithServerData = (serverData: IMainProps) => {
+  return {
+    ...INITIAL_STATE,
+    ...serverData
   }
 }
 

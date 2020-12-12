@@ -42,10 +42,9 @@ export interface IJobsProps {
 }
 
 export interface IMainProps {
-  jobType: IFilterType[];
-  experience: IFilterType[];
-  department: IFilterType[];
-  workSchedule: IFilterType[];
+  filters: {
+    [key in FILTER_OPTIONS]: IFilterType[];
+  }
   jobs: IJobsProps[];
 }
 
@@ -95,4 +94,5 @@ export type IHomeReducerActionType =
 export interface IFiltersProps {
   heading: string;
   filters: IFilterType[];
+  filterType: FILTER_OPTIONS;
 }
