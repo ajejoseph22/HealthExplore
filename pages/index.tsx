@@ -5,6 +5,7 @@ import Main from '../components/organisms/Main';
 import Footer from '../components/organisms/Footer';
 import reducer, { initialStateWithServerData } from '../reducers/home';
 import { FILTER_OPTIONS, IHomeActionTypes, IMainProps, SORT_OPTIONS } from '../types';
+import HomeAPI from '../services';
 
 const Home = ({ filters, jobs }: IMainProps) => {
 
@@ -12,9 +13,25 @@ const Home = ({ filters, jobs }: IMainProps) => {
 
   useEffect(() => {
     if(state.isLoading) {
-
+      (async function() {
+        try {
+          const response = await HomeAPI.getJobs({
+            sortOptions: state.sortOptions,
+            filters: state.filters,
+            searchText: state.searchText,
+          })
+          dispatch({
+            type: IHomeActionTypes.LOADING_DONE,
+            payload: { data: response }
+          })
+        } catch(err) {
+          dispatch({
+            type: IHomeActionTypes.LOADING_ERROR
+          })
+        }
+      })()
     }
-  }, [state.isLoading])
+  }, [state.isLoading, dispatch])
 
   const onClickEventDelegation = (event: MouseEvent<HTMLElement>) => {
     const eventTarget = event.target as HTMLElement;
@@ -40,6 +57,7 @@ const Home = ({ filters, jobs }: IMainProps) => {
       payload: { searchText: event.currentTarget.value }
     })
   }, [dispatch])
+
   return (
     <div
       className='font-mono flex flex-col w-screen bg-gray-50 m-h-full'
@@ -59,16 +77,10 @@ const Home = ({ filters, jobs }: IMainProps) => {
   )
 }
 
-const callAPI = async (url: string) => {
-  const response = await fetch(url);
-  const json = await response.json();
-  return json;
-}
-
 export const getStaticProps = async () => {
   const response = await Promise.all([
-    callAPI(`${process.env.API_URL}/api/filters`),
-    callAPI(`${process.env.API_URL}/api/jobs`)
+    HomeAPI.getFilters(),
+    HomeAPI.getJobs()
   ])
   return { props: {
     filters: response[0],

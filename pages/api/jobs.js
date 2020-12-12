@@ -2,6 +2,9 @@
 import jobs from '../../data/jobs.json';
 
 export default async (req, res) => {
+  const {
+    query
+  } = req;
   res.statusCode = 200;
   // @todo: implement filters and search
   // @todo: implement automated tests
