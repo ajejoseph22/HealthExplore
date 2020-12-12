@@ -16,7 +16,7 @@ const Content = ({
     <div className='flex flex-col bg-white flex-grow py-5 mx-3'>
       <div className='flex justify-between'>
         <div className='flex'>
-          <p className='font-semibold ml-5'>{jobs.reduce((acc, cur) => cur.total_jobs_in_hospital + acc, 0)}</p>
+          <p className='font-semibold ml-5'>{jobs.reduce((acc, cur) => cur.items.length + acc, 0)}</p>
           <p className='ml-2 text-gray-500 text-sm italic'>job postings</p>
         </div>
         <div className='flex'>

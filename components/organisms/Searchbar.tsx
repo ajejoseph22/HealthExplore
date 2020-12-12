@@ -15,7 +15,7 @@ const Searchbar = ({
         </svg>
       </button>
       <input value={searchText} onChange={onSearchTextChange}
-        className="border-gray-300 bg-white h-12 px-5 pl-12 rounded-lg text-sm focus:outline-none w-full"
+        className="border-gray-300 bg-white h-12 px-5 pl-12 rounded-lg text-sm focus:outline-none w-screen"
         type="search" name="search" placeholder="Search for any job, title, keywords or company"/>
     </div>
   )

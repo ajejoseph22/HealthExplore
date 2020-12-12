@@ -28,8 +28,8 @@ const callAPI = async (url: string, options={}) => {
         }
       }
     }
-    if(params['searchTerm']) {
-      parameters.push(`searchTerm=${encodeURIComponent(params['searchTerm'])}`)
+    if(params['searchText']) {
+      parameters.push(`searchText=${encodeURIComponent(params['searchText'])}`)
     }
     if(parameters.length) {
       parameters[0] = '?' + parameters[0];
