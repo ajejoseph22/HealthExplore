@@ -3,6 +3,11 @@ import { useState } from 'react';
 
 //Components
 import HospitalAvatar from './HospitalAvatar';
+import PrimaryButton from '../buttons/PrimaryButton';
+import SecondaryButton from '../buttons/SecondaryButton';
+
+//Modules
+import moment from 'moment';
 
 const JobItem = ({ jobData }) => {
     //State
@@ -45,28 +50,44 @@ const JobItem = ({ jobData }) => {
                             <p className={'font-light'}>{item.job_type} | ${item.salary_range[0]} - ${item.salary_range[1]} per hour | {item.city}</p>
                         </div>
                         <div className={`${showPositions && index == selectedJob && showDetails ? 'flex' : 'hidden'} flex-col w-full mt-4`}>
-                            <div className={`w-full flex`}>
-                                <div className={'w-1/2'}>
-                                    <p className={'mt-4 font-bold'}>Department:</p>
+                            <div className={`w-full flex justify-between sm:flex-col-reverse`}>
+                                <div className={'flex w-4/5 sm:flex-col'}>
+                                    <div className={'w-full'}>
+                                        <p className={'mt-4 font-bold'}>Department:</p>
+                                    </div>
+                                    <div className={'w-full'}>
+                                        <p className={'mt-4'}>{item.department.join()}</p>
+                                    </div>
                                 </div>
-                                <div className={'w-1/2'}>
-                                    <p className={'mt-4'}>{item.department.join()}</p>
-                                </div>
-                            </div>
-                            <div className={`w-full flex`}>
-                                <div className={'w-1/2'}>
-                                    <p className={'mt-4 font-bold'}>Hours / shifts:</p>
-                                </div>
-                                <div className={'w-1/2'}>
-                                    <p className={'mt-4'}>{item.hours.join()} hours / {item.work_schedule}</p>
+                                <div>
+                                    <p className={'mt-4'}>{moment(item.created).fromNow()}</p>
                                 </div>
                             </div>
-                            <div className={`w-full flex`}>
-                                <div className={'w-1/2'}>
-                                    <p className={'mt-4 font-bold'}>Summary:</p>
+                            <div className={`w-full flex justify-between sm:flex-col`}>
+                                <div className={'flex w-4/5 sm:flex-col'}>
+                                    <div className={'w-full'}>
+                                        <p className={'mt-4 font-bold'}>Hours / shifts:</p>
+                                    </div>
+                                    <div className={'w-full'}>
+                                        <p className={'mt-4'}>{item.hours.join()} hours / {item.work_schedule}</p>
+                                    </div>
                                 </div>
-                                <div className={'w-1/2'}>
-                                    <p className={'mt-4'}>{item.description}</p>
+                                <div className={'mt-4'}>
+                                    <PrimaryButton title={'Job Details'} />
+                                </div>
+                            </div>
+                            <div className={`w-full flex justify-between sm:flex-col`}>
+                                <div className={'flex w-4/5 sm:flex-col'}>
+                                    <div className={'w-full'}>
+                                        <p className={'mt-4 font-bold'}>Summary:</p>
+                                    </div>
+                                    <div className={'w-full'}>
+                                        <p className={'mt-4'}>{item.description}</p>
+                                    </div>
+                                </div>
+
+                                <div className={'mt-4'}>
+                                    <SecondaryButton title={'Save Job'} />
                                 </div>
                             </div>
                         </div>
