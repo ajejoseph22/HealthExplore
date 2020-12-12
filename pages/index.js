@@ -10,9 +10,26 @@ import SearchBar from '../components/search/SarchBar';
 import FilterCard from '../components/navigation/FilterCard';
 import JobList from '../components/jobs/JobList';
 
+//Services
+import { searchJobs } from '../services/jobs';
+
 function Home({ filters, jobs }) {
   //State
   const [searchInput, setSearchInput] = useState('');
+  const [showJobs, setShowJobs] = useState(jobs.jobs);
+
+  //Functions
+  const jobSearch = () => {
+    searchJobs(searchInput)
+      .then(result => {
+        if (result.status === 200) {
+          setShowJobs(result.jobs);
+        }
+        else {
+          console.log('Something went wrong with the search request')
+        }
+      })
+  }
 
   return (
     <div className={`min-h-screen w-full`}>
@@ -26,6 +43,7 @@ function Home({ filters, jobs }) {
           placeholder={'Search for any job, title, keywords or company'}
           value={searchInput}
           onInputChange={newText => setSearchInput(newText)}
+          onSearch={() => jobSearch()}
         />
       </div>
 
@@ -44,7 +62,7 @@ function Home({ filters, jobs }) {
         </div>
         <div className={'flex w-2/3 p-6 pt-0 sm:w-full sm:p-0'}>
           <JobList
-            data={jobs.jobs}
+            data={showJobs}
             totalJobs={jobs.total_jobs}
           />
         </div>
