@@ -32,7 +32,6 @@ const reducer = (state: IHomeState, action: IHomeReducerActionType) => {
   switch(action.type) {
     case IHomeActionTypes.TOGGLE_SORT_OPTION: {
       const prevOption = state.sortOptions[action.payload.option];
-      console.log(action.payload.option)
       return {
         ...state,
         sortOptions: {

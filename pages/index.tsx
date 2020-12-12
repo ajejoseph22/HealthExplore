@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { ChangeEvent, MouseEvent, useCallback, useReducer } from 'react';
+import { ChangeEvent, MouseEvent, useCallback, useEffect, useReducer } from 'react';
 import Navbar from '../components/organisms/Navbar';
 import Main from '../components/organisms/Main';
 import Footer from '../components/organisms/Footer';
@@ -7,8 +7,15 @@ import reducer, { initialStateWithServerData } from '../reducers/home';
 import { FILTER_OPTIONS, IHomeActionTypes, IMainProps, SORT_OPTIONS } from '../types';
 
 const Home = ({ filters, jobs }: IMainProps) => {
+
   const [state, dispatch] = useReducer(reducer, initialStateWithServerData({ filters, jobs }))
-  console.log(state)
+
+  useEffect(() => {
+    if(state.isLoading) {
+
+    }
+  }, [state.isLoading])
+
   const onClickEventDelegation = (event: MouseEvent<HTMLElement>) => {
     const eventTarget = event.target as HTMLElement;
     const filterOption = eventTarget.closest('[data-filter-type]') as (HTMLElement | null);
@@ -20,14 +27,12 @@ const Home = ({ filters, jobs }: IMainProps) => {
         payload: { filterKey, filterType: filterType as FILTER_OPTIONS }
       })
     } else if(sortOption) {
-      console.log(sortOption.dataset)
       dispatch({
         type: IHomeActionTypes.TOGGLE_SORT_OPTION,
         payload: { option: sortOption.dataset['sortOption'] as SORT_OPTIONS }
       })
     }
   }
-
 
   const onSearchTextChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
