@@ -75,12 +75,12 @@ const JobList = ({ data, totalJobs }) => {
                 </div>
             </div >
             { data && data.length > 0 ?
-                data.map((item, index) => (
+                data.map((item, index) =>
                     <JobItem
                         key={`job_item_${index}`}
                         jobData={item}
                     />
-                ))
+                )
                 : false
             }
         </div >

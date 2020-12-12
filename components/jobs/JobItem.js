@@ -9,7 +9,14 @@ import SecondaryButton from '../buttons/SecondaryButton';
 //Modules
 import moment from 'moment';
 
+//Redux
+import { useSelector } from 'react-redux';
+
 const JobItem = ({ jobData }) => {
+    //Redux
+    const filterIndex = useSelector(state => state.filter.filterIndex);
+    const filter = useSelector(state => state.filter.filter);
+
     //State
     const [showPositions, setShowPositions] = useState(false);
     const [showDetails, setShowDetails] = useState(false);
@@ -41,7 +48,22 @@ const JobItem = ({ jobData }) => {
 
             {jobData.items && jobData.items.length > 0 ?
                 jobData.items.map((item, index) => (
-                    <div key={`job_data_${index}`}>
+                    <div
+                        key={`job_data_${index}`}
+                        className={`
+                            ${filterIndex ?
+                                Array.isArray(item[filterIndex]) ?
+                                    item[filterIndex].includes(filter) ?
+                                        'block'
+                                        : 'hidden'
+                                    :
+                                    item[filterIndex] == filter ?
+                                        'block'
+                                        : 'hidden'
+                                : 'block'
+                            }
+                        `}
+                    >
                         <div
                             className={`${showPositions ? 'flex' : 'hidden'} flex-col mt-4 justify-center border-t border-grey-300 cursor-pointer`}
                             onClick={() => openJobDetails(index)}
