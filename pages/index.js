@@ -3,8 +3,9 @@ import Navbar from '../components/organisms/Navbar';
 import Main from '../components/organisms/Main';
 
 const Home = ({
-  job_type: jobType, work_schedule: workSchedule,
-  experience, department
+  filters: { job_type: jobType, work_schedule: workSchedule,
+  experience, department },
+  jobs
 }) => {
   return (
     <div className='font-mono flex flex-col w-screen bg-gray-50 m-h-full'>
@@ -18,16 +19,28 @@ const Home = ({
         workSchedule={workSchedule}
         experience={experience}
         department={department}
+        jobs={jobs}
       />
     </div>
   )
 }
 
-export const getStaticProps = async (context, req) => {
-  console.log(global)
-  const response = await fetch(`${process.env.API_URL}/api/filters`)
-  const json = await response.json()
-  return { props: json };
+const callAPI = async (url) => {
+  const response = await fetch(url);
+  const json = await response.json();
+  return json;
+}
+
+export const getStaticProps = async () => {
+  const response = await Promise.all([
+    callAPI(`${process.env.API_URL}/api/filters`),
+    callAPI(`${process.env.API_URL}/api/jobs`)
+  ])
+  console.log(response)
+  return { props: {
+    filters: response[0],
+    jobs: response[1]
+  }};
 }
 
 export default Home;

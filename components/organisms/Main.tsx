@@ -1,15 +1,16 @@
 import { IMainProps } from "../../types";
+import Content from "./Content";
 import Filters from "./Filters";
 import Searchbar from "./Searchbar";
 
 const Main = ({
-  experience, jobType, department, workSchedule
+  experience, jobType, department, workSchedule, jobs
 }: IMainProps) => {
   return (
     <main className='flex flex-col border-8 border-white'>
       <Searchbar />
-      <div>
-        <div className='flex flex-col'>
+      <div className='flex'>
+        <div className='flex flex-col mx-3'>
           <Filters
             filters={jobType}
             heading='JOB TYPE'
@@ -27,6 +28,7 @@ const Main = ({
             heading='EXPERIENCE'
           />
         </div>
+        <Content jobs={jobs}/>
       </div>
     </main>
   )

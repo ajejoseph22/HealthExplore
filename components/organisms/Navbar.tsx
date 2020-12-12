@@ -17,10 +17,10 @@ const Navbar = () => {
         <NavLink>SALARY</NavLink>
       </div>
       <div className='flex items-center'>
-        <button>
+        <button className='rounded-lg border-solid border-2 border-blue-500 text-blue-500 font-semibold p-2 mx-5'>
           CREATE JOB
         </button>
-        <p className='mx-2.5 pt-2 bg-blue-500 rounded-full text-white h-10 w-10 text-center text-bold align-middle'>
+        <p className='mx-2.5 pt-2 bg-blue-500 rounded-full text-white h-10 w-10 text-center font-semibold align-middle'>
           VAR
         </p>
         <NavLink className='mr-4'>
