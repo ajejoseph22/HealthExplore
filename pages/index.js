@@ -45,6 +45,7 @@ function Home({ filters, jobs }) {
         <div className={'flex w-2/3 p-6 pt-0 sm:w-full sm:p-0'}>
           <JobList
             data={jobs.jobs}
+            totalJobs={jobs.total_jobs}
           />
         </div>
       </div>
@@ -60,6 +61,7 @@ export async function getServerSideProps() {
 
   const jobsRes = await fetch('http://localhost:3000/api/jobs')
   const jobs = await jobsRes.json()
+  console.log(jobs.total_jobs);
 
   // Pass data to the page via props
   return { props: { filters, jobs } }

@@ -11,5 +11,5 @@ export default async (req, res) => {
   // correct results even if server-side can't finish replies in the right order
   await new Promise((resolve) => setTimeout(resolve, 1000 * Math.random()));
 
-  res.json({ jobs })
+  res.json({ jobs, total_jobs: 'test' })
 }
