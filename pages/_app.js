@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import Head from 'next/head'
 
 import TopBar from './components/topbar/TopBar';
+import Footer from './components/footer/Footer';
 
 const App = ({ Component, pageProps }) => {
   return (
@@ -13,6 +14,7 @@ const App = ({ Component, pageProps }) => {
       </Head>
       <TopBar />
       <Component {...pageProps} />
+      <Footer />
     </>
   )
 }

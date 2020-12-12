@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const ActionBar = props => {
   return (
     <div className="flex space-x-6 items-center">
-      <a href="#" className="hidden lg:flex border rounded-md border-blue-600 pl-1 pr-1 pt-2 pb-2">
+      <a href="#" className="hidden lg:flex border rounded-md border-blue-600 pl-1.5 pr-1.5 pt-2 pb-2">
         <span className="text-center text-blue-600 font-semibold">CREATE JOB</span>
       </a>
       <a href="#" className="inline-block relative">
