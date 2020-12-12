@@ -38,7 +38,6 @@ export const getStaticProps = async () => {
     callAPI(`${process.env.API_URL}/api/filters`),
     callAPI(`${process.env.API_URL}/api/jobs`)
   ])
-  console.log(response)
   return { props: {
     filters: response[0],
     jobs: response[1]

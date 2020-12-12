@@ -29,7 +29,7 @@ const Content = ({
         </div>
       </div>
       <ul className='mt-5 divide-y divide-gray-200 divide-opacity-80'>
-        {jobs.map((job) => <JobsGroup {...job}/>)}
+        {jobs.map((job, i) => <JobsGroup key={i} {...job}/>)}
       </ul>
     </div>
   )
