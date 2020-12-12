@@ -7,7 +7,7 @@ const Main = ({
   experience, jobType, department, workSchedule, jobs
 }: IMainProps) => {
   return (
-    <main className='flex flex-col border-8 border-white'>
+    <main className='flex flex-col mx-4'>
       <Searchbar />
       <div className='flex'>
         <div className='flex flex-col mx-3'>

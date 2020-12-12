@@ -4,9 +4,9 @@ import JobsGroup from "./JobsGroup";
 
 const SortLink = ({ children }) => {
   return (
-    <p className='text-sm mx-2'>
+    <a className='text-sm mx-2 cursor-pointer hover:text-blue-500'>
       {children}
-    </p>
+    </a>
   )
 }
 const Content = ({
