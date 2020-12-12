@@ -1,5 +1,5 @@
 //React
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 //Next
 import Head from 'next/head'
@@ -11,12 +11,60 @@ import FilterCard from '../components/navigation/FilterCard';
 import JobList from '../components/jobs/JobList';
 
 //Services
-import { searchJobs } from '../services/jobs';
+import { searchJobs, getSortedJobs } from '../services/jobs';
+
+//Redux
+import { useSelector } from 'react-redux';
 
 function Home({ filters, jobs }) {
+  //Redux
+  const selectedSort = useSelector(state => state.sort.selectedSort);
+  const sortOption = useSelector(state => state.sort.sortOption);
+
   //State
   const [searchInput, setSearchInput] = useState('');
   const [showJobs, setShowJobs] = useState(jobs.jobs);
+  const [firstMount, setFirstMount] = useState(true);
+
+  //Effect
+  useEffect(() => {
+    if (!firstMount) {
+      // if (sortOption != 'neutral' && selectedSort != null) {
+
+      //   if (sortOption == 'asc') {
+      //     console.log('asc sort');
+      //     sortJobsAsc().then(res => {
+      //       setShowJobs(res);
+      //     });
+      //   }
+      //   else if (sortOption == 'desc') {
+      //     console.warn('desc sort');
+      //     sortJobsDesc().then(res => {
+      //       setShowJobs(res);
+      //     });
+      //   }
+
+      // }
+      // else if (selectedSort == null) {
+      //   console.error('drugi');
+      //   getAllJobs().then(res => {
+      //     if (res.status == 200) {
+      //       setShowJobs(res.jobs);
+      //     }
+      //   })
+      // }
+      getSortedJobs(selectedSort, sortOption, searchInput).then(res => {
+        if (res.status === 200) {
+          setShowJobs(res.jobs);
+        }
+        else {
+          console.log('Something went wrong with sorting the jobs')
+        }
+      })
+    }
+
+    setFirstMount(false);
+  }, [sortOption]);
 
   //Functions
   const jobSearch = () => {
@@ -79,7 +127,6 @@ export async function getServerSideProps() {
 
   const jobsRes = await fetch('http://localhost:3000/api/jobs')
   const jobs = await jobsRes.json()
-  console.log(jobs.total_jobs);
 
   // Pass data to the page via props
   return { props: { filters, jobs } }

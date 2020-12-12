@@ -1,6 +1,3 @@
-//React
-import { useState } from 'react';
-
 //Components
 import JobItem from './JobItem';
 
@@ -8,37 +5,38 @@ import JobItem from './JobItem';
 import ArrowUpIcon from '../../assets/icons/arrow-up.svg';
 import ArrowDownIcon from '../../assets/icons/arrow-down.svg';
 
+//Redux
+import { useSelector, useDispatch } from 'react-redux';
+import { setSort } from '../../redux/actions/sort';
+
 //Constants
 import { sortOptions } from './constants/sortOptions';
 
 const JobList = ({ data, totalJobs }) => {
-    //State
-    const [selectedSort, setSelectedSort] = useState(null);
-    const [sortOption, setSortOption] = useState('neutral');
+    //Redux
+    const dispatch = useDispatch();
+    const selectedSort = useSelector(state => state.sort.selectedSort);
+    const sortOption = useSelector(state => state.sort.sortOption);
 
     //Functions
     const handleSortClick = (optionIndex) => {
-        setSelectedSort(optionIndex);
-
         if (optionIndex == selectedSort) {
             if (sortOption === 'neutral') {
-                setSortOption('asc');
+                dispatch(setSort(optionIndex, 'asc'));
             }
             else if (sortOption === 'asc') {
-                setSortOption('desc');
+                dispatch(setSort(optionIndex, 'desc'));
             }
             else if (sortOption === 'desc') {
-                setSortOption('neutral');
-                setSelectedSort(null);
+                dispatch(setSort(null, 'neutral'));
             }
             else {
                 console.log('Something went wrong with selecting the sort option.');
             }
         }
         else {
-            setSortOption('asc');
+            dispatch(setSort(optionIndex, 'asc'));
         }
-
     }
 
     return (
