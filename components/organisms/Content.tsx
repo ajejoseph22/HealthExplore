@@ -13,7 +13,7 @@ const Content = ({
   jobs
 }: Pick<IMainProps, 'jobs'>) => {
   return (
-    <div className='flex flex-col bg-white mt-3 flex-grow py-5'>
+    <div className='flex flex-col bg-white flex-grow py-5 mx-3'>
       <div className='flex justify-between'>
         <div className='flex'>
           <p className='font-semibold ml-5'>{jobs.reduce((acc, cur) => cur.total_jobs_in_hospital + acc, 0)}</p>

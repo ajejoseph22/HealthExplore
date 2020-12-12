@@ -4,7 +4,7 @@ const Filters = ({
   heading, filters
 }: IFiltersProps) => {
   return (
-    <div className='flex flex-col bg-white w-80 my-4 p-5'>
+    <div className='flex flex-col bg-white w-80 p-5'>
       <h6 className='pb-4'>{heading}</h6>
       <ul>
         {filters.map((filter, i) => (

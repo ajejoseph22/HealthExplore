@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Navbar from '../components/organisms/Navbar';
 import Main from '../components/organisms/Main';
+import Footer from '../components/organisms/Footer';
 
 const Home = ({
   filters: { job_type: jobType, work_schedule: workSchedule,
@@ -21,6 +22,7 @@ const Home = ({
         department={department}
         jobs={jobs}
       />
+      <Footer />
     </div>
   )
 }

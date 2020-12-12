@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { IJobsProps } from "../../types";
+import IndividualJob from './IndividualJob';
 
 const IconBuilder = ({ name }: { name: IJobsProps['name'] }) => {
   const splitName = name.split(' ');
@@ -12,12 +14,18 @@ const IconBuilder = ({ name }: { name: IJobsProps['name'] }) => {
 }
 const JobsGroup = ({
   total_jobs_in_hospital: totalJobs,
-  items, job_title: jobTitle, name
+  items, name
 }: IJobsProps) => {
+  const [isOpen, setIsOpen] = useState(false)
   return (
-    <li className='flex px-5 py-3 items-center cursor-pointer hover:bg-blue-100'>
-      <IconBuilder name={name}/>
-      <p className='ml-4 text-sm text-gray-700'>{totalJobs} jobs for {name}</p>
+    <li className='flex flex-col'>
+      <div className='flex px-5 py-3 items-center cursor-pointer hover:bg-blue-100' onClick={() => setIsOpen(!isOpen)}>
+        <IconBuilder name={name}/>
+        <p className='ml-4 text-sm text-gray-700'>{totalJobs} jobs for {name}</p>
+      </div>
+      {isOpen && <ul>
+        {items.map((item, i) => <IndividualJob key={i} {...item} />)}
+      </ul>}
     </li>
   )
 }
