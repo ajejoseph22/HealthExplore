@@ -1,4 +1,4 @@
-import { IHomeState, IHomeActionTypes, IHomeReducerActionType, IMainProps } from "../types";
+import { IHomeState, IHomeActionTypes, IHomeReducerActionType, IHomeProps } from "../types";
 
 export const INITIAL_STATE: IHomeState = {
   jobs: [],
@@ -16,10 +16,11 @@ export const INITIAL_STATE: IHomeState = {
     department: [],
     experience: [],
     work_schedule: [],
-  }
+  },
+  searchText: '',
 }
 
-export const initialStateWithServerData = (serverData: IMainProps) => {
+export const initialStateWithServerData = (serverData: IHomeProps) => {
   return {
     ...INITIAL_STATE,
     ...serverData
@@ -31,6 +32,7 @@ const reducer = (state: IHomeState, action: IHomeReducerActionType) => {
   switch(action.type) {
     case IHomeActionTypes.TOGGLE_SORT_OPTION: {
       const prevOption = state.sortOptions[action.payload.option];
+      console.log(action.payload.option)
       return {
         ...state,
         sortOptions: {
@@ -53,6 +55,13 @@ const reducer = (state: IHomeState, action: IHomeReducerActionType) => {
             return filter;
           })
         },
+        isLoading: true,
+        isError: false,
+      }
+    } case IHomeActionTypes.SEARCH_QUERY_CHANGE: {
+      return {
+        ...state,
+        searchText: action.payload.searchText,
         isLoading: true,
         isError: false,
       }

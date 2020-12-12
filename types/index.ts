@@ -1,3 +1,5 @@
+import { ChangeEvent } from "react";
+
 export enum SORT_OPTIONS {
   LOCATION = 'location',
   ROLE = 'role',
@@ -41,30 +43,31 @@ export interface IJobsProps {
   items: IIndividualJobProps[];
 }
 
-export interface IMainProps {
+export interface IHomeProps {
+  jobs: IJobsProps[];
   filters: {
     [key in FILTER_OPTIONS]: IFilterType[];
-  }
-  jobs: IJobsProps[];
+  };
 }
-
-export interface IHomeState {
+export interface IHomeState extends IHomeProps {
   isLoading: boolean;
   isError: boolean;
-  jobs: IJobsProps[];
+  searchText: string;
   sortOptions: {
     [key in SORT_OPTIONS]: SORT_ORDERS | null;
   };
-  filters: {
-    [key in FILTER_OPTIONS]: IFilterType[];
-  }
+}
+
+export interface IMainProps extends IHomeState {
+  onSearchTextChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export enum IHomeActionTypes {
   TOGGLE_SORT_OPTION,
   TOGGLE_FILTER_OPTION,
   LOADING_DONE,
-  LOADING_ERROR
+  LOADING_ERROR,
+  SEARCH_QUERY_CHANGE,
 }
 
 export interface IToggleSortOption {
@@ -85,11 +88,17 @@ export interface IUpdateErrorLoadingState {
   type: IHomeActionTypes.LOADING_ERROR;
 }
 
+export interface ISearchQueryChange {
+  type: IHomeActionTypes.SEARCH_QUERY_CHANGE;
+  payload: { searchText: string; }
+}
+
 export type IHomeReducerActionType =
   | IToggleSortOption
   | IToggleFilterOption
   | IUpdateLoadingDoneState
-  | IUpdateErrorLoadingState;
+  | IUpdateErrorLoadingState
+  | ISearchQueryChange;
 
 export interface IFiltersProps {
   heading: string;

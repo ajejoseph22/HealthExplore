@@ -6,11 +6,12 @@ import Searchbar from "./Searchbar";
 const Main = ({
   filters: {
     experience, job_type, department, work_schedule
-  }, jobs
+  }, jobs, searchText, sortOptions,
+  onSearchTextChange
 }: IMainProps) => {
   return (
     <main className='flex flex-col mx-4'>
-      <Searchbar />
+      <Searchbar onSearchTextChange={onSearchTextChange} searchText={searchText} />
       <div className='flex'>
         <div className='flex flex-col mx-3'>
           <Filters
@@ -34,7 +35,7 @@ const Main = ({
             filterType={FILTER_OPTIONS.EXPERIENCE}
           />
         </div>
-        <Content jobs={jobs}/>
+        <Content jobs={jobs} sortOptions={sortOptions}/>
       </div>
     </main>
   )
