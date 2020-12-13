@@ -12,6 +12,7 @@ const comparator = (a, b, parameter, order) => {
     return 0;
   }
 }
+
 export default async (req, res) => {
   const {
     query: { searchText='' }
@@ -35,9 +36,7 @@ export default async (req, res) => {
       item.address.indexOf(searchText) !== -1 ||
       item.experience.indexOf(searchText) !== -1 ||
       item.city.indexOf(searchText) !== -1 ||
-      item.department.filter((i) => i.indexOf(searchText) !== -1).length ||
-      item.required_credentials.filter((i) => i.indexOf(searchText) !== -1).length ||
-      item.required_skills.filter((i) => i.indexOf(searchText) !== -1).length
+      item.department.filter((i) => i.indexOf(searchText) !== -1).length
     )).filter((item) => {
       return(
         (job_type ? job_type.indexOf(item.job_type) !== -1 : noFilterSelected) ||
@@ -61,11 +60,12 @@ export default async (req, res) => {
     }
     return acc;
   }, []).sort((a, b) => {
+    // sum of comparators value with multiple filter values decides how to sort the jobs.
     return (
-      comparator(a, b, 'location', location) ||
-      comparator(a, b, 'role', role) ||
-      comparator(a, b, 'education', education) ||
-      comparator(a, b, 'experience', sortExperience) ||
+      comparator(a, b, 'location', location) +
+      comparator(a, b, 'role', role) +
+      comparator(a, b, 'education', education) +
+      comparator(a, b, 'experience', sortExperience) +
       comparator(a, b, 'department', sortDepartment)
     )
   })
@@ -75,5 +75,8 @@ export default async (req, res) => {
   // correct results even if server-side can't finish replies in the right order
   await new Promise((resolve)=>setTimeout(resolve, 1000 * Math.random()));
 
-  res.json(data)
+  res.json({
+    jobs: data,
+    search_text: searchText
+  })
 }

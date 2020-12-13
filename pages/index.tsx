@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import Main from '../components/Main';
 import Footer from '../components/Footer';
 import reducer, { initialStateWithServerData } from '../reducers/home';
-import { FILTER_OPTIONS, IHomeActionTypes, IMainProps, SORT_OPTIONS } from '../types';
+import { FILTER_OPTIONS, IHomeActionTypes, IJobsProps, IMainProps, SORT_OPTIONS } from '../types';
 import HomeAPI from '../services';
 
 const Home = ({ filters, jobs }: IMainProps) => {
@@ -15,16 +15,18 @@ const Home = ({ filters, jobs }: IMainProps) => {
     if(state.isLoading) {
       (async function() {
         try {
-          const response = await HomeAPI.getJobs(
+          const { jobs, searchText } = await HomeAPI.getJobs(
             {
             sortOptions: state.sortOptions,
             filters: state.filters,
             searchText: state.searchText,
           })
-          dispatch({
-            type: IHomeActionTypes.LOADING_DONE,
-            payload: { data: response }
-          })
+          if(searchText === state.searchText) {
+            dispatch({
+              type: IHomeActionTypes.LOADING_DONE,
+              payload: { data: jobs }
+            })
+          }
         } catch(err) {
           dispatch({
             type: IHomeActionTypes.LOADING_ERROR
@@ -85,7 +87,7 @@ Home.getInitialProps = async ({ req: { headers: { host }} }) => {
   ])
   return {
     filters: response[0],
-    jobs: response[1]
+    jobs: response[1].jobs
   };
 }
 
