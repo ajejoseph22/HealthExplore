@@ -17,7 +17,7 @@ const JobList = props => {
   const sortItemsBar = () => {
     return (
       <div className="flex justify-between p-4">
-        <p><span className="font-bold">{jobs ? jobs.length : 0}</span> job postings</p>
+        <p><span className="font-bold">{jobs.length}</span> job postings</p>
 
         <div className="flex items-center lg:flex hidden">
           <p className="font-bold text-gray-500 text-sm mr-4">Sort by</p>
@@ -37,9 +37,9 @@ const JobList = props => {
 
   return (
     <div className="w-3/4 w-full flex flex-col bg-white">
-      { sortItemsBar() }
+      { sortItems && sortItemsBar() }
       <ul className="p-4">
-        { jobsList() }
+        { jobs.length && jobsList() }
       </ul>
     </div>
   );

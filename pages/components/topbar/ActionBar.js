@@ -4,7 +4,7 @@ const ActionBar = props => {
   return (
     <div className="flex space-x-6 items-center">
       <a href="#" className="hidden lg:flex border rounded-md border-blue-500 pl-1.5 pr-1.5 pt-2 pb-2">
-        <span className="text-center text-blue-500 font-semibold">CREATE JOB</span>
+        <span className="text-center text-blue-500 font-semibold text-sm">CREATE JOB</span>
       </a>
       <a href="#" className="inline-block relative">
         <div className="h-10 w-10 rounded-full bg-blue-500 border border-white flex items-center justify-center">
