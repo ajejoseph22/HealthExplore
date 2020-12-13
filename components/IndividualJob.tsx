@@ -9,7 +9,7 @@ const IndividualJob = ({
 }: IIndividualJobProps) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <li className='flex flex-col' onClick={() => setIsOpen(!isOpen)}>
+    <li className='flex flex-col bg-gray-100' onClick={() => setIsOpen(!isOpen)}>
       <div className={`flex justify-between px-5 py-3 ${isOpen ? '' : 'cursor-pointer hover:bg-blue-100'}`}>
         <div className='flex flex-col'>
           <p className='text-sm text-gray-900 font-bold'>

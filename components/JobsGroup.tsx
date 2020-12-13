@@ -22,7 +22,7 @@ const JobsGroup = ({
         <IconBuilder name={name}/>
         <p className='ml-4 text-sm text-gray-700'>{items.length} jobs for {name}</p>
       </div>
-      {isOpen && <ul>
+      {isOpen && <ul className='divide-y-2 divide-gray-400 divide-opacity-20'>
         {items.map((item, i) => <IndividualJob key={i} {...item} />)}
       </ul>}
     </li>

@@ -4,7 +4,7 @@ import JobsGroup from "./JobsGroup";
 
 const SortOption = ({ children, className='', ...props }) => {
   return (
-    <p className={'text-sm mx-2 cursor-pointer hover:text-blue-500 '+className} {...props}>
+    <p className={'text-sm mx-2 h-5 cursor-pointer hover:text-blue-500 '+className} {...props}>
       {children}
     </p>
   )
@@ -25,31 +25,31 @@ const Content = ({
             data-sort-option={SORT_OPTIONS.LOCATION}
             className={sortOptions[SORT_OPTIONS.LOCATION] !== null ? 'text-blue-600' : ''}
           >Location
-            <span className=' w-6 block text-gray-600 text-xs mt-auto'>{sortOptions[SORT_OPTIONS.LOCATION]}</span>
+            <span className='w-6 block text-gray-600 text-xs mt-auto'>{sortOptions[SORT_OPTIONS.LOCATION]}</span>
           </SortOption>
           <SortOption
             data-sort-option={SORT_OPTIONS.ROLE}
             className={sortOptions[SORT_OPTIONS.ROLE] !== null ? 'text-blue-600' : ''}
           >Role
-            <span className=' w-6 block text-gray-600 text-xs mt-auto'>{sortOptions[SORT_OPTIONS.ROLE]}</span>
+            <span className='w-6 block text-gray-600 text-xs mt-auto'>{sortOptions[SORT_OPTIONS.ROLE]}</span>
           </SortOption>
           <SortOption
             data-sort-option={SORT_OPTIONS.DEPARTMENT}
             className={sortOptions[SORT_OPTIONS.DEPARTMENT] !== null ? 'text-blue-600' : ''}
           >Department
-            <span className=' w-6 block text-gray-600 text-xs mt-auto'>{sortOptions[SORT_OPTIONS.DEPARTMENT]}</span>
+            <span className='w-6 block text-gray-600 text-xs mt-auto'>{sortOptions[SORT_OPTIONS.DEPARTMENT]}</span>
           </SortOption>
           <SortOption
             data-sort-option={SORT_OPTIONS.EDUCATION}
             className={sortOptions[SORT_OPTIONS.EDUCATION] !== null ? 'text-blue-600' : ''}
           >Education
-            <span className=' w-6 block text-gray-600 text-xs mt-auto'>{sortOptions[SORT_OPTIONS.EDUCATION]}</span>
+            <span className='w-6 block text-gray-600 text-xs mt-auto'>{sortOptions[SORT_OPTIONS.EDUCATION]}</span>
           </SortOption>
           <SortOption
             data-sort-option={SORT_OPTIONS.EXPERIENCE}
             className={sortOptions[SORT_OPTIONS.EXPERIENCE] !== null ? 'text-blue-600' : ''}
           >Experience
-            <span className=' w-6 block text-gray-600 text-xs mt-auto'>{sortOptions[SORT_OPTIONS.EXPERIENCE]}</span>
+            <span className='w-6 block text-gray-600 text-xs mt-auto'>{sortOptions[SORT_OPTIONS.EXPERIENCE]}</span>
           </SortOption>
         </div>
       </div>

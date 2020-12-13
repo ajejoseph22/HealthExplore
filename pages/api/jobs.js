@@ -16,7 +16,6 @@ export default async (req, res) => {
   const {
     query: { searchText='' }
   } = req;
-  console.log(req.query)
   const job_type = req.query['filter[job_type]'],
     department = req.query['filter[department]'],
     work_schedule = req.query['filter[work_schedule]'],

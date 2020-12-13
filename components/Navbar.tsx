@@ -16,7 +16,7 @@ const Navbar = () => {
         <NavLink>LOUNGE</NavLink>
         <NavLink>SALARY</NavLink>
       </div>
-      <div className='flex justify-end sm:items-center flex-grow'>
+      <div className='flex justify-end sm:items-center flex-grow sm:flex-none'>
         <button className='hidden sm:block rounded-lg border-solid border-2 border-blue-500 text-blue-500 font-semibold p-2 mx-5'>
           CREATE JOB
         </button>
