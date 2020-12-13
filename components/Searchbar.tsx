@@ -4,7 +4,7 @@ const Searchbar = ({
   searchText, onSearchTextChange
 }: Pick<IMainProps, 'searchText' | 'onSearchTextChange'>) => {
   return (
-    <div className="min-w-min my-3 relative mx-auto text-gray-600">
+    <div className="min-w-full my-3 relative text-gray-600">
       <button type="submit" className="absolute left-0 top-0 mt-3 ml-3">
         <svg className="text-gray-600 h-6 w-6 fill-current"
           version="1.1" id="Capa_1" x="0px" y="0px"
@@ -15,7 +15,7 @@ const Searchbar = ({
         </svg>
       </button>
       <input value={searchText} onChange={onSearchTextChange}
-        className="border-gray-300 bg-white h-12 px-5 pl-12 rounded-lg text-sm focus:outline-none w-screen"
+        className="border-gray-300 min-w-full bg-white h-12 px-5 pl-12 rounded-lg text-sm focus:outline-none"
         type="search" name="search" placeholder="Search for any job, title, keywords or company"/>
     </div>
   )

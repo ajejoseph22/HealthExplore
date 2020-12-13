@@ -12,12 +12,15 @@ const Home = ({ filters, jobs }: IMainProps) => {
 
   const [state, dispatch] = useReducer(reducer, initialStateWithServerData({ filters, jobs }))
 
+  const searchTermRef = useRef('')
+
   const throttleFunc = useMemo(() => throttle(({
     sortOptions, filters, searchText
   }) => {
     (async function() {
       try {
         const response = await HomeAPI.getJobs({sortOptions,filters,searchText})
+        // current searchterm is evaluated with server responses search term.
         if(response.search_text === searchText) {
           dispatch({
             type: IHomeActionTypes.LOADING_DONE,
@@ -30,17 +33,17 @@ const Home = ({ filters, jobs }: IMainProps) => {
         })
       }
     })()
-  }, 1000), [])
+  }, 1000), [searchTermRef])
 
   useEffect(() => {
     if(state.isLoading) {
-      console.log("inside before trigger.")
       const { filters, sortOptions, searchText } = state;
+      searchTermRef.current = searchText;
       throttleFunc({
         sortOptions, filters, searchText
       })
     }
-  }, [state.isLoading, state.searchText, state.sortOptions, state.filters, throttleFunc, dispatch])
+  }, [state.isLoading, state.searchText, state.sortOptions, state.filters, throttleFunc, searchTermRef, dispatch])
 
   const onClickEventDelegation = (event: MouseEvent<HTMLElement>) => {
     const eventTarget = event.target as HTMLElement;
