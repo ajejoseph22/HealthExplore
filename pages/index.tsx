@@ -15,7 +15,9 @@ const Home = ({ filters, jobs }: IMainProps) => {
     if(state.isLoading) {
       (async function() {
         try {
-          const response = await HomeAPI.getJobs({
+          const response = await HomeAPI.getJobs(
+            window.location.origin,
+            {
             sortOptions: state.sortOptions,
             filters: state.filters,
             searchText: state.searchText,
@@ -77,10 +79,12 @@ const Home = ({ filters, jobs }: IMainProps) => {
   )
 }
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async ({ req: { headers: { referer } } }) => {
+  if(referer[referer.length - 1] === '/') referer = referer.slice(0, referer.length - 1)
+  console.log("referer", referer)
   const response = await Promise.all([
-    HomeAPI.getFilters(),
-    HomeAPI.getJobs()
+    HomeAPI.getFilters(referer),
+    HomeAPI.getJobs(referer)
   ])
   return { props: {
     filters: response[0],
