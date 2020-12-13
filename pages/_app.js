@@ -1,8 +1,8 @@
 import '../styles/globals.css'
 import Head from 'next/head'
 
-import TopBar from './components/topbar/TopBar';
-import Footer from './components/footer/Footer';
+import TopBar from '../components/topbar/TopBar';
+import Footer from '../components/footer/Footer';
 
 const App = ({ Component, pageProps }) => {
   return (

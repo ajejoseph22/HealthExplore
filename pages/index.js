@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-import SearchBar from './components/home/SearchBar';
-import FilterBar from './components/home/FilterBar';
-import JobList from './components/home/JobList';
+import SearchBar from '../components/home/SearchBar';
+import FilterBar from '../components/home/FilterBar';
+import JobList from '../components/home/JobList';
 import { getJobs } from '../api/RESTApi';
 
 const Home = props => {

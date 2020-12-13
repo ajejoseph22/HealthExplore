@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { getFilterList } from '../../../api/RESTApi';
+import { getFilterList } from '../../api/RESTApi';
 
 const FilterBar = props => {
   const { filters, addFilter } = props;

@@ -1,5 +1,6 @@
 import React from 'react';
 import Job from './Job';
+import PropTypes from 'prop-types'
 
 const JobList = props => {
   const { jobs, sortItems, changeSort } = props;
@@ -37,12 +38,18 @@ const JobList = props => {
 
   return (
     <div className="w-3/4 w-full flex flex-col bg-white">
-      { sortItems && sortItemsBar() }
+      { sortItemsBar() }
       <ul className="p-4">
-        { jobs.length && jobsList() }
+        { jobsList() }
       </ul>
     </div>
   );
+}
+
+JobList.propTypes = {
+  jobs: PropTypes.array,
+  sortItems: PropTypes.object,
+  changeSort: PropTypes.func
 }
 
 export default JobList;
