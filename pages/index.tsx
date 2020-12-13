@@ -16,7 +16,6 @@ const Home = ({ filters, jobs }: IMainProps) => {
       (async function() {
         try {
           const response = await HomeAPI.getJobs(
-            window.location.origin,
             {
             sortOptions: state.sortOptions,
             filters: state.filters,
@@ -81,8 +80,8 @@ const Home = ({ filters, jobs }: IMainProps) => {
 
 Home.getInitialProps = async ({ req: { headers: { host }} }) => {
   const response = await Promise.all([
-    HomeAPI.getFilters(`${process.env.NODE_ENV !== 'production' ? 'http' : 'https'}://${host}`),
-    HomeAPI.getJobs(`${process.env.NODE_ENV !== 'production' ? 'http' : 'https'}://${host}`)
+    HomeAPI.getFilters(),
+    HomeAPI.getJobs()
   ])
   return {
     filters: response[0],

@@ -1,6 +1,6 @@
 
 const callAPI = async (url: string, options={}) => {
-  const response = await fetch(url, options);
+  const response = await fetch(process.env.NEXT_PUBLIC_API_URL + url, options);
   const json = await response.json();
   return json;
 }
@@ -10,7 +10,7 @@ const callAPI = async (url: string, options={}) => {
    * parameter parsing is done to get search parameters from client and use them in API call
    * on first render.
    */
-  async getJobs(origin: string, params={}) {
+  async getJobs(params={}) {
     let parameters = []
     if(params['filters']) {
       for(let i in params['filters']) {
@@ -34,11 +34,11 @@ const callAPI = async (url: string, options={}) => {
     if(parameters.length) {
       parameters[0] = '?' + parameters[0];
     }
-    const url = `${origin}/api/jobs${parameters.join('&')}`;
+    const url = `/api/jobs${parameters.join('&')}`;
     return callAPI(url)
   },
-  async getFilters(origin: string) {
-    return callAPI(`${origin}/api/filters`)
+  async getFilters() {
+    return callAPI(`/api/filters`)
   }
 }
 
