@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import jobs from "../../data/jobs";
+import jobs from "../../data/jobs.json";
 import { IJobListing } from "../../app/interfaces";
 import {
   applyFullSearch,

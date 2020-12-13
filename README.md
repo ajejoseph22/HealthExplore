@@ -1,5 +1,7 @@
 # fullstack-candidate-testing
 
+https://clipboard-health-challenge.vercel.app/
+
 ## Pre-requirements
 
 yarn install
