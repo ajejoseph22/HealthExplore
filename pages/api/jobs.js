@@ -4,9 +4,9 @@ import jobs from '../../data/jobs.json';
 const comparator = (a, b, parameter, order) => {
   if(order) {
     if(a[parameter] > b[parameter]) {
-      return 1
+      return order === 'asc' ? 1 : -1
     } else {
-      return -1;
+      return order === 'asc' ? -1 : 1;
     }
   } else {
     return 0;
@@ -16,6 +16,7 @@ export default async (req, res) => {
   const {
     query: { searchText='' }
   } = req;
+  console.log(req.query)
   const job_type = req.query['filter[job_type]'],
     department = req.query['filter[department]'],
     work_schedule = req.query['filter[work_schedule]'],
