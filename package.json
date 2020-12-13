@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 80",
-    "build": "next build -p 80",
+    "build": "npm run build-css && next build && next export",
+    "build-css": "tailwind build ./styles/globals.css -c ./tailwind.config.js -o ./styles/globals.css",
     "start": "next start -p 80"
   },
   "dependencies": {
     "autoprefixer": "^10.1.0",
+    "axios": "^0.21.0",
     "next": "10.0.3",
     "postcss": "^8.2.1",
     "react": "17.0.1",

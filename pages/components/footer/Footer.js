@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const Footer = props => {
   return (
-    <footer className="flex flex-wrap p-8 border-none bg-white">
+    <footer className="flex flex-wrap p-5 border-none bg-white mr-5 ml-5">
       <div className="lg:w-3/5 w-full flex flex-col mb-2 p-2">
         <h3 className="text-lg font-semibold">About us</h3>
         <span className="text-sm mt-2">We are a team of nurses, doctors, technologists and executives dedicated to help nurses find jobs that they love.</span>

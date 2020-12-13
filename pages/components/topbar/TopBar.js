@@ -28,7 +28,7 @@ const TopBar = props => {
 
   return (
     <>
-      <div className="flex justify-between items-center w-full z-50 p-5 text-md top-0 bg-white border-none px-16">
+      <div className="flex justify-between items-center w-full z-50 p-5 text-md top-0 bg-white border-none">
         <OpenVerticalNavButton open={openVerticalNavBar} />
         <Title />
         <HorizontalNavBar />
