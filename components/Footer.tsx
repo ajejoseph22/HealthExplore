@@ -1,6 +1,6 @@
 const Footer = () => (
-  <footer className='grid grid-cols-7 bg-white mt-5 h-220 gap-2'>
-    <div className='flex flex-col col-span-3 ml-8 my-8'>
+  <footer className='grid grid-cols-3 sm:grid-cols-7 bg-white mt-5 h-220 gap-2'>
+    <div className='flex flex-col col-span-3 ml-8 mt-8'>
       <h6 className='text-2xl py-3'>
         About us
       </h6>
@@ -11,7 +11,7 @@ const Footer = () => (
         All copyrights reserved &#169; 2020 - Health Explore
       </p>
     </div>
-    <div className='flex flex-col col-span-2 my-8'>
+    <div className='flex flex-col col-span-2 sm:my-8 my-0 ml-8 sm:ml-0'>
       <h6 className='text-2xl py-3'>
         Sitemap
       </h6>
@@ -28,7 +28,7 @@ const Footer = () => (
         Jobs
       </a>
     </div>
-    <div className='flex flex-col col-span-2 my-8'>
+    <div className='flex flex-col col-span-2 sm:my-8 my-0 ml-8 sm:ml-0 mb-6 sm:mb-0'>
       <h6 className='text-2xl py-3'>
         Privacy
       </h6>

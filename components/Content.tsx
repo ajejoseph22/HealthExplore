@@ -19,7 +19,7 @@ const Content = ({
           <p className='font-semibold ml-5'>{jobs.reduce((acc, cur) => cur.items.length + acc, 0)}</p>
           <p className='ml-2 text-gray-500 text-sm italic'>job postings</p>
         </div>
-        <div className='flex'>
+        <div className='hidden sm:flex'>
           <p className='text-gray-500 text-sm mx-2'>Sort by</p>
           <SortOption
             data-sort-option={SORT_OPTIONS.LOCATION}

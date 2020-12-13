@@ -13,7 +13,7 @@ const Main = ({
     <main className='flex flex-col mx-4'>
       <Searchbar onSearchTextChange={onSearchTextChange} searchText={searchText} />
       <div className='flex'>
-        <div className='flex flex-col mx-3'>
+        <div className='hidden sm:flex flex-col mx-3'>
           <Filters
             filters={job_type}
             heading='JOB TYPE'
