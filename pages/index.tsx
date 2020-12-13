@@ -79,17 +79,15 @@ const Home = ({ filters, jobs }: IMainProps) => {
   )
 }
 
-export const getServerSideProps = async ({ req: { headers: { referer } } }) => {
-  if(referer[referer.length - 1] === '/') referer = referer.slice(0, referer.length - 1)
-  console.log("referer", referer)
+Home.getInitialProps = async ({ req: { headers: { host }} }) => {
   const response = await Promise.all([
-    HomeAPI.getFilters(referer),
-    HomeAPI.getJobs(referer)
+    HomeAPI.getFilters(`${process.env.NODE_ENV !== 'production' ? 'http' : 'https'}://${host}`),
+    HomeAPI.getJobs(`${process.env.NODE_ENV !== 'production' ? 'http' : 'https'}://${host}`)
   ])
-  return { props: {
+  return {
     filters: response[0],
     jobs: response[1]
-  }};
+  };
 }
 
 export default Home;

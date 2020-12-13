@@ -1,6 +1,5 @@
 
 const callAPI = async (url: string, options={}) => {
-  console.log(url)
   const response = await fetch(url, options);
   const json = await response.json();
   return json;
