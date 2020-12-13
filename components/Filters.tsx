@@ -1,4 +1,4 @@
-import { IFiltersProps } from "../../types";
+import { IFiltersProps } from "../types";
 
 const Filters = ({
   heading, filters, filterType

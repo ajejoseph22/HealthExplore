@@ -1,4 +1,4 @@
-import { IMainProps } from "../../types";
+import { IMainProps } from "../types";
 
 const Searchbar = ({
   searchText, onSearchTextChange

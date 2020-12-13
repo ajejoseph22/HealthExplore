@@ -1,4 +1,4 @@
-import { IHomeState, SORT_OPTIONS } from "../../types";
+import { IHomeState, SORT_OPTIONS } from "../types";
 import JobsGroup from "./JobsGroup";
 
 

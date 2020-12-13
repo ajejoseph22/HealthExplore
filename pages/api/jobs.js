@@ -1,12 +1,29 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import jobs from '../../data/jobs.json';
 
+const comparator = (a, b, parameter, order) => {
+  if(order) {
+    if(a[parameter] > b[parameter]) {
+      return 1
+    } else {
+      return -1;
+    }
+  } else {
+    return 0;
+  }
+}
 export default async (req, res) => {
   const {
-    query: { searchText='', job_type='', department='', work_schedule='', experience='' }
+    query: { searchText='' }
   } = req;
+  const job_type = req.query['filter[job_type]'],
+    department = req.query['filter[department]'],
+    work_schedule = req.query['filter[work_schedule]'],
+    experience = req.query['experience'];
+  const location = req.query['sort[location]'],
+    role = req.query['sort[role]'], education = req.query['sort[education]'],
+    sortExperience = req.query['sort[experience]'], sortDepartment = req.query['sort[department]'];
   res.statusCode = 200;
-  console.log(job_type)
   const noFilterSelected = !(job_type || department || work_schedule || experience)
   // @todo: implement filters and search
   const data = jobs.reduce((acc, job) => {
@@ -30,8 +47,8 @@ export default async (req, res) => {
       )
     })
     if (
-      job.job_title.indexOf(searchText) !== -1 ||
-      job.name.indexOf(searchText) !== -1 ||
+      (job.job_title.indexOf(searchText) !== -1 ||
+      job.name.indexOf(searchText) !== -1) &&
       jobItems.length
     ) {
       return [
@@ -43,8 +60,15 @@ export default async (req, res) => {
       ]
     }
     return acc;
-  }, [])
-  // @todo: implement automated tests
+  }, []).sort((a, b) => {
+    return (
+      comparator(a, b, 'location', location) ||
+      comparator(a, b, 'role', role) ||
+      comparator(a, b, 'education', education) ||
+      comparator(a, b, 'experience', sortExperience) ||
+      comparator(a, b, 'department', sortDepartment)
+    )
+  })
 
   // this timeout emulates unstable network connection, do not remove this one
   // you need to figure out how to guarantee that client side will render

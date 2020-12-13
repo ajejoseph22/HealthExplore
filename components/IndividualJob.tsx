@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IIndividualJobProps } from "../../types";
+import { IIndividualJobProps } from "../types";
 
 const IndividualJob = ({
   department, description, hours,

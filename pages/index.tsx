@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { ChangeEvent, MouseEvent, useCallback, useEffect, useReducer } from 'react';
-import Navbar from '../components/organisms/Navbar';
-import Main from '../components/organisms/Main';
-import Footer from '../components/organisms/Footer';
+import Navbar from '../components/Navbar';
+import Main from '../components/Main';
+import Footer from '../components/Footer';
 import reducer, { initialStateWithServerData } from '../reducers/home';
 import { FILTER_OPTIONS, IHomeActionTypes, IMainProps, SORT_OPTIONS } from '../types';
 import HomeAPI from '../services';

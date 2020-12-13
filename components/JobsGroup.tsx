@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IJobsProps } from "../../types";
+import { IJobsProps } from "../types";
 import IndividualJob from './IndividualJob';
 
 const IconBuilder = ({ name }: { name: IJobsProps['name'] }) => {

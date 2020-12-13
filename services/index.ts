@@ -16,7 +16,7 @@ const callAPI = async (url: string, options={}) => {
       for(let i in params['filters']) {
         const filteredParams = params['filters'][i].filter((i) => i.active).map((i) => i.key).join(',')
         if(filteredParams) {
-          parameters.push(`${i}=${encodeURIComponent(filteredParams)}`)
+          parameters.push(`filter[${i}]=${encodeURIComponent(filteredParams)}`)
         }
       }
     }
@@ -24,7 +24,7 @@ const callAPI = async (url: string, options={}) => {
       for(let i in params['sortOptions']) {
         const value = params['sortOptions']
         if(value[i]) {
-          parameters.push(`${i}=${value[i]}`)
+          parameters.push(`sort[${i}]=${value[i]}`)
         }
       }
     }
@@ -35,7 +35,6 @@ const callAPI = async (url: string, options={}) => {
       parameters[0] = '?' + parameters[0];
     }
     const url = `/api/jobs${parameters.join('&')}`;
-    console.log("url", url)
     return callAPI(url)
   },
   async getFilters() {

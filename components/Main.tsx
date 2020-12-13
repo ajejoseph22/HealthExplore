@@ -1,4 +1,4 @@
-import { FILTER_OPTIONS, IMainProps } from "../../types";
+import { FILTER_OPTIONS, IMainProps } from "../types";
 import Content from "./Content";
 import Filters from "./Filters";
 import Searchbar from "./Searchbar";
