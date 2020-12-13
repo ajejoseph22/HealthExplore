@@ -1,40 +1,46 @@
 import Head from 'next/head';
-import { ChangeEvent, MouseEvent, useCallback, useEffect, useReducer } from 'react';
+import { ChangeEvent, MouseEvent, useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Main from '../components/Main';
 import Footer from '../components/Footer';
 import reducer, { initialStateWithServerData } from '../reducers/home';
-import { FILTER_OPTIONS, IHomeActionTypes, IJobsProps, IMainProps, SORT_OPTIONS } from '../types';
+import { FILTER_OPTIONS, IHomeActionTypes, IMainProps, SORT_OPTIONS } from '../types';
+import throttle from '../helpers/throttle';
 import HomeAPI from '../services';
 
 const Home = ({ filters, jobs }: IMainProps) => {
 
   const [state, dispatch] = useReducer(reducer, initialStateWithServerData({ filters, jobs }))
 
-  useEffect(() => {
-    if(state.isLoading) {
-      (async function() {
-        try {
-          const { jobs, searchText } = await HomeAPI.getJobs(
-            {
-            sortOptions: state.sortOptions,
-            filters: state.filters,
-            searchText: state.searchText,
-          })
-          if(searchText === state.searchText) {
-            dispatch({
-              type: IHomeActionTypes.LOADING_DONE,
-              payload: { data: jobs }
-            })
-          }
-        } catch(err) {
+  const throttleFunc = useMemo(() => throttle(({
+    sortOptions, filters, searchText
+  }) => {
+    (async function() {
+      try {
+        const response = await HomeAPI.getJobs({sortOptions,filters,searchText})
+        if(response.search_text === searchText) {
           dispatch({
-            type: IHomeActionTypes.LOADING_ERROR
+            type: IHomeActionTypes.LOADING_DONE,
+            payload: { data: response.jobs }
           })
         }
-      })()
+      } catch(err) {
+        dispatch({
+          type: IHomeActionTypes.LOADING_ERROR
+        })
+      }
+    })()
+  }, 1000), [])
+
+  useEffect(() => {
+    if(state.isLoading) {
+      console.log("inside before trigger.")
+      const { filters, sortOptions, searchText } = state;
+      throttleFunc({
+        sortOptions, filters, searchText
+      })
     }
-  }, [state.isLoading, dispatch])
+  }, [state.isLoading, state.searchText, state.sortOptions, state.filters, throttleFunc, dispatch])
 
   const onClickEventDelegation = (event: MouseEvent<HTMLElement>) => {
     const eventTarget = event.target as HTMLElement;

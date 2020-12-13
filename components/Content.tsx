@@ -14,7 +14,7 @@ const Content = ({
   jobs, sortOptions, isLoading
 }: Pick<IHomeState, 'jobs' | 'sortOptions' | 'isLoading'>) => {
   return (
-    <div className='flex flex-col bg-white flex-grow py-5 mx-3 sm:mt-5'>
+    <div className='flex flex-col bg-white flex-grow py-5 sm:mx-3 sm:mt-5'>
       <div className='flex justify-between'>
         <div className='flex'>
           <p className='font-semibold ml-5'>{jobs.reduce((acc, cur) => cur.items.length + acc, 0)}</p>
