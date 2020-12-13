@@ -1,5 +1,6 @@
 import { IHomeState, SORT_OPTIONS } from "../types";
 import JobsGroup from "./JobsGroup";
+import SkeletonLoader from "./SkeletonLoader";
 
 
 const SortOption = ({ children, className='', ...props }) => {
@@ -10,8 +11,8 @@ const SortOption = ({ children, className='', ...props }) => {
   )
 }
 const Content = ({
-  jobs, sortOptions
-}: Pick<IHomeState, 'jobs' | 'sortOptions'>) => {
+  jobs, sortOptions, isLoading
+}: Pick<IHomeState, 'jobs' | 'sortOptions' | 'isLoading'>) => {
   return (
     <div className='flex flex-col bg-white flex-grow py-5 mx-3'>
       <div className='flex justify-between'>
@@ -54,7 +55,9 @@ const Content = ({
         </div>
       </div>
       <ul className='mt-5 divide-y divide-gray-200 divide-opacity-80'>
-        {jobs.map((job, i) => <JobsGroup key={i} {...job}/>)}
+        {isLoading ? <div className='flex flex-col w-full'>
+          {[0,1,2,3,4,5,6,7,8].map((i) => <SkeletonLoader key={i}/>)}
+        </div> : jobs.map((job, i) => <JobsGroup key={i} {...job}/>)}
       </ul>
     </div>
   )

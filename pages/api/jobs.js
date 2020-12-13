@@ -25,7 +25,7 @@ export default async (req, res) => {
     sortExperience = req.query['sort[experience]'], sortDepartment = req.query['sort[department]'];
   res.statusCode = 200;
   const noFilterSelected = !(job_type || department || work_schedule || experience)
-  // @todo: implement filters and search
+  // implement of filters and search
   const data = jobs.reduce((acc, job) => {
     let jobItems = job.items.filter((item) => (
       item.job_title.indexOf(searchText) !== -1 ||

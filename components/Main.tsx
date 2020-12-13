@@ -6,7 +6,7 @@ import Searchbar from "./Searchbar";
 const Main = ({
   filters: {
     experience, job_type, department, work_schedule
-  }, jobs, searchText, sortOptions,
+  }, jobs, searchText, sortOptions, isLoading,
   onSearchTextChange
 }: IMainProps) => {
   return (
@@ -35,7 +35,7 @@ const Main = ({
             filterType={FILTER_OPTIONS.EXPERIENCE}
           />
         </div>
-        <Content jobs={jobs} sortOptions={sortOptions}/>
+        <Content jobs={jobs} sortOptions={sortOptions} isLoading={isLoading}/>
       </div>
     </main>
   )
