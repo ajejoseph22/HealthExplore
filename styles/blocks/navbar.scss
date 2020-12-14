@@ -1,0 +1,66 @@
+#navbar {
+	
+}
+
+/**
+ * Container
+ */
+
+#navbar > .container {
+	@apply flex justify-between items-center w-full z-50 p-5 text-xs top-0 bg-white border-none;
+}
+
+// Logo
+#navbar > .container > .logo {
+	@apply text-blue-600 text-lg text-center font-semibold uppercase;
+}
+
+// Burger
+#navbar > .container > .menu-burger {
+	@apply block lg:hidden;
+}
+
+#navbar > .container > .menu-burger > i {
+	@apply text-base text-black;
+}
+
+/**
+ * Items
+ */
+#navbar .navbar-desktop {
+	@apply hidden lg:flex space-x-10 font-semibold uppercase mr-2;
+}
+
+#navbar .navbar-mobile {
+	@apply flex lg:hidden flex-col bg-white items-center space-y-2 pb-4 uppercase;
+}
+
+#navbar .navbar-mobile > li {
+	@apply py-2 mx-4;
+}
+
+#navbar .navbar-desktop > li,
+#navbar .navbar-mobile > li {
+	@apply font-semibold;
+}
+
+/**
+ * Action
+ */
+#navbar .navbar-actions {
+	@apply flex space-x-6 items-center;
+}
+
+#navbar .navbar-actions > .item {
+	@apply relative font-semibold;
+}
+
+// User
+
+#navbar .navbar-actions > .item.user > .name {
+	@apply h-10 w-10 rounded-full bg-blue-500 border border-white flex items-center justify-center text-white text-sm;
+}
+
+#navbar .navbar-actions > .item.user > .notifications {
+	@apply absolute top-0 right-0 h-4 w-4 rounded-full bg-red-600 border border-white flex items-center justify-center text-white text-xs;
+}

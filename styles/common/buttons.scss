@@ -1,0 +1,10 @@
+
+.button {
+	@apply border rounded-md pl-2.5 pr-2.5 pt-2 pb-2;
+	@apply text-center font-semibold text-sm;
+}
+
+.button.is-blue.is-outline {
+	@apply border-blue-500;
+	@apply text-blue-500;
+}

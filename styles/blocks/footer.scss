@@ -1,0 +1,15 @@
+#footer {
+	@apply flex flex-wrap p-5 border-none bg-white mr-5 ml-5;
+}
+
+#footer > .column {
+	@apply flex flex-col mb-2 p-2;
+}
+
+#footer > .column > .header {
+	@apply text-lg font-semibold;
+}
+
+#footer > .column > p {
+	@apply text-sm mt-2;
+}
