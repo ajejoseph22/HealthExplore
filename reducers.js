@@ -8,6 +8,9 @@ const projectReducer = produce((draft, action) => {
         case 'jobs/set':
             draft.jobs = action.jobs;
             break;
+        case 'jobs/loading':
+            draft.ui.jobsLoading = action.isLoading;
+            break;
         case 'queryModifiers/setQueryModifier':
             draft.ui.queryModifiers[action.modifierKey] = action.modifierValue;
             break;

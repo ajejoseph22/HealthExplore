@@ -14,7 +14,9 @@ import JobsListings from '../components/JobsListings';
 
 import { fetchFilters } from '../actions';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { notification } from 'antd';
 
 
 export async function getStaticProps() {
@@ -25,6 +27,7 @@ export async function getStaticProps() {
         filters: {},
         jobs: [],
         ui: {
+          jobsLoading: false,
           searchText: '',
           activeFilters: {},
           queryModifiers: {
@@ -42,10 +45,22 @@ export async function getStaticProps() {
 
 export default function Home({ initialReduxState }) {
   const [showSidebar, setShowSidebar] = useState(false);
+  const jobsLoading = useSelector(state => state.ui.jobsLoading)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchFilters());
   }, []);
+
+  useEffect(() => {
+    if (jobsLoading) {
+      notification.info({
+        key: 'jobs-loading',
+        message: 'Loading...',
+      });
+    } else {
+      notification.close('jobs-loading');
+    }
+  }, [jobsLoading])
 
   return (
     <div className={commonStyles.jobsWrapper}>

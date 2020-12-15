@@ -64,7 +64,7 @@ export const searchForJobsUsingSagas = () => ({
 
 export const searchJobsWithFilter = () => {
     return async (dispatch, getState) => {
-        dispatch(setJobsLoading(false));
+        dispatch(setJobsLoading(true));
         const activeFilters = getState().ui.activeFilters;
         const sortingModifiers = getState().ui.queryModifiers;
         let result = await fetch(`${server}/api/jobs`);
