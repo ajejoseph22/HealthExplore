@@ -40,10 +40,21 @@ export default function JobsListings() {
         <Collapse 
           onChange={callback} 
           accordion 
-          expandIcon={props => <div className={commonStyles.expandIcon}>LA</div>}
+          expandIcon={() => null}
         >
           {jobsData && jobsData.map((job, index) => {
-            return <Panel header={job.name} key={index + 1}>
+            return <Panel header={<div style={{
+              display: 'flex',
+              padding: '4px',
+              alignItems: 'center'
+            }}>
+              <div className={commonStyles.expandIcon}>{job.name.slice(0, 2).toUpperCase()}</div>
+              <div style={{
+                'paddingLeft': '8px',
+                display: 'flex'
+              }}>{job.name}</div>
+              </div>} 
+              key={index + 1}>
             <Collapse defaultActiveKey="1" accordion>
               {job.items.map((item, itemIndex) => {
                 return <Panel showArrow={false} header={<JobShortDescription item={item}/>} key={itemIndex + 1}>
