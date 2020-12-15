@@ -7,7 +7,7 @@
 }
 .ant-collapse > .ant-collapse-item > .ant-collapse-header {
     position: relative;
-    padding: 12px 50px;
+    padding: 12px 0px;
 }
 .ant-collapse > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow {
     top: 10px !important;
