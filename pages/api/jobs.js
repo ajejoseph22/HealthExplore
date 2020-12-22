@@ -6,9 +6,11 @@ import FuzzySearch from "fuzzy-search";
 export default async (req, res) => {
   const {
     query,
+    jobType,
+    department,
+    workShift,
     location,
     role,
-    department,
     education,
     experience,
   } = req.query;
@@ -17,7 +19,7 @@ export default async (req, res) => {
     return acc.concat(job.items);
   }, []);
 
-  const result = query
+  let result = query
     ? new FuzzySearch(listOfJobs, [
         "job_title",
         "name",
@@ -29,6 +31,21 @@ export default async (req, res) => {
       ]).search(query)
     : listOfJobs;
 
+  result = jobType
+    ? new FuzzySearch(result, ["job_type"]).search(jobType)
+    : result;
+
+  result = department
+    ? new FuzzySearch(result, ["department"]).search(department)
+    : result;
+
+  result = experience
+    ? new FuzzySearch(result, ["experience"]).search(experience)
+    : result;
+
+  result = workShift
+    ? new FuzzySearch(result, ["work_schedule"]).search(workShift)
+    : result;
   // console.log("result", result);
 
   const { filteredResult } = await (
