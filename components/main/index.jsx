@@ -1,7 +1,5 @@
 import React from "react";
-import JobType from "../job-type";
 import Jobs from "../jobs";
-import Department from "../department";
 import LeftMenuBar from "../left-menu-bar";
 
 const Main = ({ jobs, query }) => {
