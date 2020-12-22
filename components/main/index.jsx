@@ -1,6 +1,8 @@
 import React from "react";
 import JobType from "../job-type";
 import Jobs from "../jobs";
+import Department from "../department";
+import LeftMenuBar from "../left-menu-bar";
 
 const Main = ({ jobs, query }) => {
   const [updatedJobs, setUpdatedJobs] = React.useState([]);
@@ -13,7 +15,7 @@ const Main = ({ jobs, query }) => {
 
   return (
     <main className="md:flex mt-6 w-full px-4">
-      <JobType />
+        <LeftMenuBar />
       <Jobs jobs={jobs} updatedJobs={updatedJobs} />
     </main>
   );
