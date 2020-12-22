@@ -5,11 +5,23 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "prettier --write"
+  },
+  "husky": {
+    "hooks": {
+    }
   },
   "dependencies": {
+    "autoprefixer": "10.1.0",
+    "fast-sort": "2.2.0",
+    "fuzzy-search": "3.2.1",
+    "husky": "^4.3.6",
     "next": "10.0.3",
+    "postcss": "8.2.1",
+    "prettier": "2.2.1",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "tailwindcss": "2.0.2"
   }
 }
