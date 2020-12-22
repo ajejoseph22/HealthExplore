@@ -14,7 +14,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,css}": "prettier --write"
+    "*.{js,jsx,ts,css}": "prettier --write"
   },
   "dependencies": {
     "autoprefixer": "10.1.0",

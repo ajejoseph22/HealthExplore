@@ -2,7 +2,8 @@ import jobs from "../../data/jobs.json";
 import { getAllJobs } from "../../lib/jobs";
 
 export function Jobs({ jobs, updatedJobs }) {
-  const fetchedJobs = updatedJobs.length ? updatedJobs : jobs;
+  // const fetchedJobs = updatedJobs.length ? updatedJobs : jobs;
+  const fetchedJobs = updatedJobs;
   return (
     <section className="w-full md:w-10/12 md:ml-2 bg-white py-4 px-4">
       <div className="flex justify-between mb-8 item-center">
