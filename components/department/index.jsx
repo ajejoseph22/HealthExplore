@@ -1,6 +1,6 @@
 import { HomeContext } from "../../pages";
 import * as React from "react";
-import { getLinkColor } from "../../util/methods";
+import { getLinkStyle } from "../../util/methods";
 
 const departments = [
   "Anesthesiology & Perioperative Medicine",
@@ -38,7 +38,7 @@ const Department = () => {
                     setFilter({ department: "" });
                   }
                 }}
-                style={{ cursor: getLinkColor(clicked, department) }}
+                style={getLinkStyle(clicked, department)}
                 className="mb-2 capitalize"
               >
                 {department}

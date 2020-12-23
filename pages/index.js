@@ -9,11 +9,13 @@ import { getAllJobs } from "../lib/jobs";
 //////// CONTEXT /////////
 export const HomeContext = React.createContext({
   setFilter: () => {},
+  setSortingOptions: () => {},
 });
 
 const Home = (props) => {
   const [query, setQuery] = React.useState("");
   const [filters, setFilters] = React.useState({});
+  const [sortingOptions, setSortingOptions] = React.useState({});
 
   const handleSetQuery = (query) => {
     setQuery(query);
@@ -23,9 +25,17 @@ const Home = (props) => {
     setFilters({ ...filters, ...filtersObj });
   };
 
+  const handleSetSortingOptions = (sortingOptionsObj) => {
+    setSortingOptions({ ...sortingOptions, ...sortingOptionsObj });
+  };
+
   return (
     <HomeContext.Provider
-      value={{ setFilter: (filterObj) => handleSetFilters(filterObj) }}
+      value={{
+        setFilter: (filterObj) => handleSetFilters(filterObj),
+        setSortingOptions: (sortingOptionsObj) =>
+          handleSetSortingOptions(sortingOptionsObj),
+      }}
     >
       <div>
         <Head>
@@ -34,8 +44,17 @@ const Home = (props) => {
         </Head>
 
         <Navbar />
-        <SearchBar setFilters={handleSetFilters} setQuery={handleSetQuery} />
-        <Main filters={filters} query={query} {...props} />
+        <SearchBar
+          setSorting={handleSetSortingOptions}
+          setFilters={handleSetFilters}
+          setQuery={handleSetQuery}
+        />
+        <Main
+          sortingOptions={sortingOptions}
+          filters={filters}
+          query={query}
+          {...props}
+        />
         <footer />
       </div>
     </HomeContext.Provider>

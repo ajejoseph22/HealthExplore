@@ -1,7 +1,27 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-// import filters from "../../data/filters";
 import jobs from "../../data/jobs.json";
 import FuzzySearch from "fuzzy-search";
+import groupBy from "lodash.groupby";
+
+const applyFilter = (result, jobType, department, workShift, experience) => {
+  let newResult = jobType
+    ? new FuzzySearch(result, ["job_type"]).search(jobType)
+    : result;
+
+  newResult = department
+    ? new FuzzySearch(result, ["department"]).search(department)
+    : newResult;
+
+  newResult = experience
+    ? new FuzzySearch(result, ["experience"]).search(experience)
+    : newResult;
+
+  newResult = workShift
+    ? new FuzzySearch(result, ["work_schedule"]).search(workShift)
+    : newResult;
+
+  return newResult;
+};
 
 export default async (req, res) => {
   const {
@@ -9,10 +29,12 @@ export default async (req, res) => {
     jobType,
     department,
     workShift,
-    location,
-    role,
-    education,
     experience,
+    locationSort,
+    roleSort,
+    educationSort,
+    experienceSort,
+    departmentSort,
   } = req.query;
 
   const listOfJobs = jobs.reduce((acc, job) => {
@@ -31,34 +53,27 @@ export default async (req, res) => {
       ]).search(query)
     : listOfJobs;
 
-  result = jobType
-    ? new FuzzySearch(result, ["job_type"]).search(jobType)
-    : result;
-
-  result = department
-    ? new FuzzySearch(result, ["department"]).search(department)
-    : result;
-
-  result = experience
-    ? new FuzzySearch(result, ["experience"]).search(experience)
-    : result;
-
-  result = workShift
-    ? new FuzzySearch(result, ["work_schedule"]).search(workShift)
-    : result;
-  // console.log("result", result);
+  result = applyFilter(result, jobType, department, workShift, experience);
 
   const { filteredResult } = await (
     await fetch("http://localhost:3000/api/filters", {
       method: "POST",
-      body: JSON.stringify({ payload: result, criteria: { location: "asc" } }),
+      body: JSON.stringify({
+        payload: result,
+        criteria: {
+          location: locationSort,
+          education: educationSort,
+          role: roleSort,
+          experience: experienceSort,
+          department: departmentSort,
+        },
+      }),
       headers: {
         "Content-type": "application/json",
       },
     })
   ).json();
 
-  // @todo: implement filters and search
   // @todo: implement automated tests
 
   // this timeout emulates unstable network connection, do not remove this one
@@ -67,5 +82,5 @@ export default async (req, res) => {
   await new Promise((resolve) => setTimeout(resolve, 1000 * Math.random()));
 
   res.statusCode = 200;
-  res.json({ result: filteredResult });
+  res.json({ result: groupBy(filteredResult, (job) => job.name) });
 };

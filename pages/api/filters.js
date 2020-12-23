@@ -4,10 +4,13 @@ import sort from "fast-sort";
 
 export default async (req, res) => {
   const { payload, criteria } = req.body;
-  console.log(payload, payload);
+  console.log("CRITERIA", criteria);
   const sortParamsMap = {
     location: "county",
     role: "job_title",
+    experience: "experience",
+    department: "department",
+    education: "required_credentials",
   };
 
   const result = sort(payload).by(

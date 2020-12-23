@@ -1,5 +1,5 @@
 import { HomeContext } from "../../pages";
-import { getLinkColor } from "../../util/methods";
+import { getLinkStyle } from "../../util/methods";
 import * as React from "react";
 
 const jobTypes = ["Per dorm", "Traveler", "Part-time", "Full-time"];
@@ -25,10 +25,7 @@ const JobType = () => {
                     setFilter({ jobType: "" });
                   }
                 }}
-                style={{
-                  cursor: "pointer",
-                  color: getLinkColor(clicked, jobType),
-                }}
+                style={getLinkStyle(clicked, jobType)}
                 className="mb-2 capitalize"
               >
                 {jobType}{" "}

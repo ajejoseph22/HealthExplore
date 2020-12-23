@@ -1,6 +1,6 @@
 import { HomeContext } from "../../pages";
 import * as React from "react";
-import { getLinkColor } from "../../util/methods";
+import { getLinkStyle } from "../../util/methods";
 
 const experience = ["Intermediate", "Senior", "Internship", "Junior"];
 
@@ -25,10 +25,7 @@ const Experience = () => {
                   }
                 }}
                 key={i}
-                style={{
-                  cursor: "pointer",
-                  color: getLinkColor(clicked, experience),
-                }}
+                style={getLinkStyle(clicked, experience)}
                 className="mb-2 capitalize"
               >
                 {experience}

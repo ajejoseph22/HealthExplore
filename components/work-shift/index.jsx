@@ -1,6 +1,6 @@
 import { HomeContext } from "../../pages";
 import * as React from "react";
-import { getLinkColor } from "../../util/methods";
+import { getLinkStyle } from "../../util/methods";
 
 const shifts = ["Night Shift", "Day Shift"];
 
@@ -25,10 +25,7 @@ const WorkShift = () => {
                     setFilter({ workShift: "" });
                   }
                 }}
-                style={{
-                  cursor: "pointer",
-                  color: getLinkColor(clicked, workShift),
-                }}
+                style={getLinkStyle(clicked, workShift)}
                 className="mb-2 capitalize"
               >
                 {workShift}{" "}
