@@ -1,19 +1,17 @@
 import React from "react";
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
 import Navbar from "../components/navbar";
 import SearchBar from "../components/searchbar";
 import Main from "../components/main";
-import { getAllJobs } from "../lib/jobs";
+import { emptyString } from "../util/constants";
 
-//////// CONTEXT /////////
 export const HomeContext = React.createContext({
   setFilter: () => {},
   setSortingOptions: () => {},
 });
 
 const Home = (props) => {
-  const [query, setQuery] = React.useState("");
+  const [query, setQuery] = React.useState(emptyString);
   const [filters, setFilters] = React.useState({});
   const [sortingOptions, setSortingOptions] = React.useState({});
 
@@ -60,16 +58,5 @@ const Home = (props) => {
     </HomeContext.Provider>
   );
 };
-
-// export async function getServerSideProps() {
-//   const response = await fetch(`http://localhost:3000/api/jobs`);
-//   const jobs = (await response.json()).result;
-//   console.log("got here");
-//   return {
-//     props: {
-//       jobs,
-//     },
-//   };
-// }
 
 export default Home;

@@ -1,10 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import filters from "../../data/filters";
 import sort from "fast-sort";
 
 export default async (req, res) => {
   const { payload, criteria } = req.body;
-  console.log("CRITERIA", criteria);
+
   const sortParamsMap = {
     location: "county",
     role: "job_title",
@@ -24,5 +23,5 @@ export default async (req, res) => {
   );
 
   res.statusCode = 200;
-  res.json({ filteredResult: result });
+  res.json({ sortedResult: result });
 };

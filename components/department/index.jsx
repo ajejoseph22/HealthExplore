@@ -1,22 +1,7 @@
 import { HomeContext } from "../../pages";
 import * as React from "react";
 import { getLinkStyle } from "../../util/methods";
-
-const departments = [
-  "Anesthesiology & Perioperative Medicine",
-  "Orthopaedic Surgery",
-  "Pediatrics",
-  "Ophthalmology",
-  "Neurosurgery",
-  "Pathology & Laboratory Medicine",
-  "Medicine",
-  "Neurology",
-  "Family Medicine",
-  "Head and Neck Surgery",
-  "Radiation Oncology",
-  "Dental Services",
-  "Rehabilitation Services",
-];
+import { departments, emptyString } from "../../util/constants";
 
 const Department = () => {
   const [clicked, setClicked] = React.useState({});
@@ -31,11 +16,11 @@ const Department = () => {
                 key={i}
                 onClick={() => {
                   if (!clicked.hasOwnProperty(department)) {
-                    setClicked({ [department]: "" });
+                    setClicked({ [department]: emptyString });
                     setFilter({ department });
                   } else {
                     setClicked({});
-                    setFilter({ department: "" });
+                    setFilter({ department: emptyString });
                   }
                 }}
                 style={getLinkStyle(clicked, department)}

@@ -1,8 +1,7 @@
 import { HomeContext } from "../../pages";
 import * as React from "react";
 import { getLinkStyle } from "../../util/methods";
-
-const shifts = ["Night Shift", "Day Shift"];
+import { emptyString, shifts } from "../../util/constants";
 
 const WorkShift = () => {
   const [clicked, setClicked] = React.useState({});
@@ -18,11 +17,11 @@ const WorkShift = () => {
                 key={i}
                 onClick={() => {
                   if (!clicked.hasOwnProperty(workShift)) {
-                    setClicked({ [workShift]: "" });
+                    setClicked({ [workShift]: emptyString });
                     setFilter({ workShift });
                   } else {
                     setClicked({});
-                    setFilter({ workShift: "" });
+                    setFilter({ workShift: emptyString });
                   }
                 }}
                 style={getLinkStyle(clicked, workShift)}

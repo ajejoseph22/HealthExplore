@@ -9,15 +9,15 @@ const applyFilter = (result, jobType, department, workShift, experience) => {
     : result;
 
   newResult = department
-    ? new FuzzySearch(result, ["department"]).search(department)
+    ? new FuzzySearch(newResult, ["department"]).search(department)
     : newResult;
 
   newResult = experience
-    ? new FuzzySearch(result, ["experience"]).search(experience)
+    ? new FuzzySearch(newResult, ["experience"]).search(experience)
     : newResult;
 
   newResult = workShift
-    ? new FuzzySearch(result, ["work_schedule"]).search(workShift)
+    ? new FuzzySearch(newResult, ["work_schedule"]).search(workShift)
     : newResult;
 
   return newResult;
@@ -41,7 +41,7 @@ export default async (req, res) => {
     return acc.concat(job.items);
   }, []);
 
-  let result = query
+  const result = query
     ? new FuzzySearch(listOfJobs, [
         "job_title",
         "name",
@@ -53,13 +53,19 @@ export default async (req, res) => {
       ]).search(query)
     : listOfJobs;
 
-  result = applyFilter(result, jobType, department, workShift, experience);
+  const filteredResult = applyFilter(
+    result,
+    jobType,
+    department,
+    workShift,
+    experience
+  );
 
-  const { filteredResult } = await (
-    await fetch("http://localhost:3000/api/filters", {
+  const { sortedResult } = await (
+    await fetch("http://localhost:3000/api/sort", {
       method: "POST",
       body: JSON.stringify({
-        payload: result,
+        payload: filteredResult,
         criteria: {
           location: locationSort,
           education: educationSort,
@@ -74,13 +80,11 @@ export default async (req, res) => {
     })
   ).json();
 
-  // @todo: implement automated tests
-
   // this timeout emulates unstable network connection, do not remove this one
   // you need to figure out how to guarantee that client side will render
   // correct results even if server-side can't finish replies in the right order
   await new Promise((resolve) => setTimeout(resolve, 1000 * Math.random()));
 
   res.statusCode = 200;
-  res.json({ result: groupBy(filteredResult, (job) => job.name) });
+  res.json({ result: groupBy(sortedResult, (job) => job.name) });
 };

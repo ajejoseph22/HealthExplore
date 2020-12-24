@@ -1,8 +1,7 @@
 import { HomeContext } from "../../pages";
 import { getLinkStyle } from "../../util/methods";
 import * as React from "react";
-
-const jobTypes = ["Per dorm", "Traveler", "Part-time", "Full-time"];
+import { emptyString, jobTypes } from "../../util/constants";
 
 const JobType = () => {
   const [clicked, setClicked] = React.useState({});
@@ -18,11 +17,11 @@ const JobType = () => {
                 key={i}
                 onClick={() => {
                   if (!clicked.hasOwnProperty(jobType)) {
-                    setClicked({ [jobType]: "" });
+                    setClicked({ [jobType]: emptyString });
                     setFilter({ jobType });
                   } else {
                     setClicked({});
-                    setFilter({ jobType: "" });
+                    setFilter({ jobType: emptyString });
                   }
                 }}
                 style={getLinkStyle(clicked, jobType)}

@@ -1,8 +1,7 @@
 import { HomeContext } from "../../pages";
 import * as React from "react";
 import { getLinkStyle } from "../../util/methods";
-
-const experience = ["Intermediate", "Senior", "Internship", "Junior"];
+import { emptyString, experience } from "../../util/constants";
 
 const Experience = () => {
   //todo : create custom hook to reuse this state logic among filter-related components
@@ -17,11 +16,11 @@ const Experience = () => {
               <li
                 onClick={() => {
                   if (!clicked.hasOwnProperty(experience)) {
-                    setClicked({ [experience]: "" });
+                    setClicked({ [experience]: emptyString });
                     setFilter({ experience });
                   } else {
                     setClicked({});
-                    setFilter({ experience: "" });
+                    setFilter({ experience: emptyString });
                   }
                 }}
                 key={i}
