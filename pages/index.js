@@ -5,6 +5,7 @@ import SearchBar from "../components/searchbar";
 import Main from "../components/main";
 import { apiUrl, emptyString } from "../util/constants";
 import Footer from "../components/footer";
+import axios from "axios";
 
 export const HomeContext = React.createContext({
   setFilter: () => {},
@@ -63,14 +64,15 @@ const Home = ({ jobs, appFilters }) => {
 
 Home.getInitialProps = async () => {
   const res = await Promise.all([
-    fetch(`${apiUrl}/jobs`),
-    fetch(`${apiUrl}/filters`),
+    axios(`${apiUrl}/jobs`),
+    axios(`${apiUrl}/filters`),
   ]);
-  const jobs = await res[0].json();
-  const filters = await res[1].json();
+
+  const [jobs, filters] = res;
+
   return {
-    jobs,
-    appFilters: filters,
+    jobs: jobs.data,
+    appFilters: filters.data,
   };
 };
 

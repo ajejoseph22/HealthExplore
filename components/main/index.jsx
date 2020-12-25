@@ -2,6 +2,7 @@ import React from "react";
 import Jobs from "../jobs";
 import LeftMenuBar from "../left-menu-bar";
 import { apiUrl, emptyString } from "../../util/constants";
+import axios from "axios";
 
 const Main = ({ query, filters, sortingOptions, jobs }) => {
   const [updatedJobs, setUpdatedJobs] = React.useState();
@@ -30,12 +31,12 @@ const Main = ({ query, filters, sortingOptions, jobs }) => {
     }
 
     setIsLoading(true);
-    const response = await fetch(
+    const response = await axios(
       `${apiUrl}/jobs?query=${query}${getQueryStringOfFilters(
         filters
       )}${getQueryStringOfSortingOptions(sortingOptions)}`
     );
-    setUpdatedJobs(await response.json());
+    setUpdatedJobs(response.data);
     setIsLoading(false);
   }, [query, filters, sortingOptions]);
 
