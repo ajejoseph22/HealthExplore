@@ -1,5 +1,3 @@
-# Fullstack-candidate-testing
-
 ## Stack
 
 * React
