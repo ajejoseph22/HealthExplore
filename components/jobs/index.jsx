@@ -71,7 +71,6 @@ export function Jobs({ jobs, isLoading }) {
                 <div
                   style={{ cursor: "pointer" }}
                   onClick={() => {
-                    console.log("clicked");
                     const el = leafRefs.current[key];
                     el.className = el.className.includes(hidden)
                       ? emptyString
