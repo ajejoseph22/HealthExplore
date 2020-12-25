@@ -1,6 +1,6 @@
 # Fullstack-candidate-testing
 
-# Stack
+## Stack
 
 * React
 * Next.JS
@@ -9,24 +9,24 @@
 
 ## Installation Instructions
 
-To run the app locally, follow the following steps:
+## To run the app locally, follow the following steps:
 
 * Clone the repo
 * Run `npm install` in the root directory of the project, to install dependencies
-* Run `npm run dev` to start a local development server. This will start on `localhost:3000` by default. If you change
+* Run `npm run dev` to start a local development server. This will start the app on `localhost:3000` by default. If you change
   this port, please update the environment variable accordingly in `.env.local`
-* Open the `localhost:3000` in your browser
+* Open `localhost:3000` in your browser
 
-To run tests:
+## To run tests:
 
 * Run `npm test`. You can also check the test coverage by running `npm run test:coverage`
 
-To create a production build:
+## To create a production build:
 
 * Run `npm run build`
 
-To serve the pruduction build:
+## To serve the pruduction build:
 
 * Run `npm start`
 
-The app has been deployed on Vercel and is accessible through this [link](https://health-explore-nine.vercel.app/) :)
+### The app has been deployed on Vercel and is accessible through this [link](https://health-explore-nine.vercel.app/) :)
