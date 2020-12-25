@@ -4,7 +4,7 @@ import WorkShift from "../work-shift";
 import Experience from "../experience";
 
 const LeftMenuBar = () => (
-  <aside className="left-menu-bar w-full xs:hidden md:w-3/12 mr-2">
+  <aside className="hidden left-menu-bar w-0 md:w-3/12 mr-2 md:block">
     <JobType />
     <Department />
     <WorkShift />

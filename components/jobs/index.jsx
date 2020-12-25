@@ -34,7 +34,7 @@ export function Jobs({ updatedJobs, isLoading }) {
                 </span>{" "}
                 Job postings
               </h5>
-              <ul className="md:flex list-none text-sm">
+              <ul className="hidden sm:flex md:flex list-none text-sm">
                 <li className="text-gray-500 mx-3">Sort by</li>
                 {sortingOptions.map((item, i) => (
                   <li
