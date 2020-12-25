@@ -64,8 +64,8 @@ const Home = ({ jobs, appFilters }) => {
 
 Home.getInitialProps = async () => {
   const res = await Promise.all([
-    axios(`${apiUrl}/jobs`),
-    axios(`${apiUrl}/filters`),
+    axios.get(`${apiUrl}/jobs`),
+    axios.get(`${apiUrl}/filters`),
   ]);
 
   const [jobs, filters] = res;

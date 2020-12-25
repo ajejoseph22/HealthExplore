@@ -31,7 +31,7 @@ const Main = ({ query, filters, sortingOptions, jobs }) => {
     }
 
     setIsLoading(true);
-    const response = await axios(
+    const response = await axios.get(
       `${apiUrl}/jobs?query=${query}${getQueryStringOfFilters(
         filters
       )}${getQueryStringOfSortingOptions(sortingOptions)}`
