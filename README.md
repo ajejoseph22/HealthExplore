@@ -1,28 +1,32 @@
-# fullstack-candidate-testing
+# Fullstack-candidate-testing
+
+# Stack
+
+* React
+* Next.JS
+* Tailwind CSS
+* Jest
 
 ## Installation Instructions
 
+To run the app locally, follow the following steps:
 
+* Clone the repo
+* Run `npm install` in the root directory of the project, to install dependencies
+* Run `npm run dev` to start a local development server. This will start on `localhost:3000` by default. If you change
+  this port, please update the environment variable accordingly in `.env.local`
+* Open the `localhost:3000` in your browser
 
-## After you're done:
-1. Push you branch
-2. Deploy your branch to a public url. We recommend you use Vercel, Netlify or AWS S3, but you're free to use any other service as long as the url is publicly accessible. 
-3. Include a README with the installation instructions and with the publicly accessible url. 
-4. Don't forget to let us know you're done to review your test.
+To run tests:
 
+* Run `npm test`. You can also check the test coverage by running `npm run test:coverage`
 
-## The fine print:
-- Please keep it simple. We don't like complicated setups.
-- Try to replicate the original designs as much as possible.
-- Functional components only. 
-- For interactions in the React app you're free to use reducers, individual component state or any other library, but again, please keep it simple.
-- Typescript use is OK but not required.
-- SCSS use is not required. It is OK to include compiled CSS files or CDN urls.
-- This test shouldn't take you more than 4-6 hours to complete.
-- After the invitation is sent, your acccess rights to this repo will last 48 hours.  
+To create a production build:
 
-## Important
+* Run `npm run build`
 
-The screenshot files are for reference only. The React app you are required to build has to look like these screenshots, but we don't expect your views to be an exact clone of every single one of them. All the components in the screenshot were built in plain .jsx with Tailwind CSS, with almost no custom CSS and no additional design assets (images, svg, logos).
+To serve the pruduction build:
 
-Good luck!
+* Run `npm start`
+
+The app has been deployed on Vercel and is accessible through this [link](https://health-explore-nine.vercel.app/) :)
