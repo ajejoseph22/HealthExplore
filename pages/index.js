@@ -3,7 +3,7 @@ import Head from "next/head";
 import Navbar from "../components/navbar";
 import SearchBar from "../components/searchbar";
 import Main from "../components/main";
-import { emptyString } from "../util/constants";
+import { apiUrl, emptyString } from "../util/constants";
 import Footer from "../components/footer";
 
 export const HomeContext = React.createContext({
@@ -11,7 +11,7 @@ export const HomeContext = React.createContext({
   setSortingOptions: () => {},
 });
 
-const Home = (props) => {
+const Home = ({ jobs, appFilters }) => {
   const [query, setQuery] = React.useState(emptyString);
   const [filters, setFilters] = React.useState({});
   const [sortingOptions, setSortingOptions] = React.useState({});
@@ -31,6 +31,7 @@ const Home = (props) => {
   return (
     <HomeContext.Provider
       value={{
+        appFilters,
         setFilter: (filterObj) => handleSetFilters(filterObj),
         setSortingOptions: (sortingOptionsObj) =>
           handleSetSortingOptions(sortingOptionsObj),
@@ -52,12 +53,25 @@ const Home = (props) => {
           sortingOptions={sortingOptions}
           filters={filters}
           query={query}
-          {...props}
+          jobs={jobs}
         />
         <Footer />
       </div>
     </HomeContext.Provider>
   );
+};
+
+Home.getInitialProps = async () => {
+  const res = await Promise.all([
+    fetch(`${apiUrl}/jobs`),
+    fetch(`${apiUrl}/filters`),
+  ]);
+  const jobs = await res[0].json();
+  const filters = await res[1].json();
+  return {
+    jobs,
+    appFilters: filters,
+  };
 };
 
 export default Home;

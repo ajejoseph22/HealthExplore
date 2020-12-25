@@ -1,10 +1,10 @@
 import React from "react";
 import Jobs from "../jobs";
 import LeftMenuBar from "../left-menu-bar";
-import { emptyString } from "../../util/constants";
+import { apiUrl, emptyString } from "../../util/constants";
 
-const Main = ({ query, filters, sortingOptions }) => {
-  const [updatedJobs, setUpdatedJobs] = React.useState([]);
+const Main = ({ query, filters, sortingOptions, jobs }) => {
+  const [updatedJobs, setUpdatedJobs] = React.useState();
   const [isLoading, setIsLoading] = React.useState(false);
 
   const getQueryStringOfFilters = (filters) => {
@@ -21,21 +21,28 @@ const Main = ({ query, filters, sortingOptions }) => {
     }, emptyString);
   };
 
+  const isFirstRun = React.useRef(true);
+
   React.useEffect(async () => {
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+      return;
+    }
+
     setIsLoading(true);
     const response = await fetch(
-      `http://localhost:3000/api/jobs?query=${query}${getQueryStringOfFilters(
+      `${apiUrl}/jobs?query=${query}${getQueryStringOfFilters(
         filters
       )}${getQueryStringOfSortingOptions(sortingOptions)}`
     );
-    setUpdatedJobs((await response.json()).result);
+    setUpdatedJobs(await response.json());
     setIsLoading(false);
   }, [query, filters, sortingOptions]);
 
   return (
     <main className="md:flex mt-6 w-full px-4">
       <LeftMenuBar />
-      <Jobs isLoading={isLoading} updatedJobs={updatedJobs} />
+      <Jobs isLoading={isLoading} jobs={updatedJobs || jobs} />
     </main>
   );
 };

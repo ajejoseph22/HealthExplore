@@ -1,9 +1,9 @@
 import { HomeContext } from "../../pages";
 import * as React from "react";
 import { getLinkStyle } from "../../util/methods";
-import { emptyString, shifts } from "../../util/constants";
+import { emptyString } from "../../util/constants";
 
-const WorkShift = () => {
+const WorkShift = ({ filter }) => {
   const [clicked, setClicked] = React.useState({});
 
   return (
@@ -12,23 +12,25 @@ const WorkShift = () => {
         <article className="bg-white text-sm p-3 mt-4">
           <h4 className="uppercase text-md font-semibold mb-3">Work Shift</h4>
           <ul className="list-none">
-            {shifts.map((workShift, i) => (
+            {filter.map((workShift, i) => (
               <li
                 key={i}
                 onClick={() => {
-                  if (!clicked.hasOwnProperty(workShift)) {
-                    setClicked({ [workShift]: emptyString });
-                    setFilter({ workShift });
+                  if (!clicked.hasOwnProperty(workShift.key)) {
+                    setClicked({ [workShift.key]: emptyString });
+                    setFilter({ workShift: workShift.key });
                   } else {
                     setClicked({});
                     setFilter({ workShift: emptyString });
                   }
                 }}
-                style={getLinkStyle(clicked, workShift)}
+                style={getLinkStyle(clicked, workShift.key)}
                 className="mb-2 capitalize"
               >
-                {workShift}{" "}
-                <span className="ml-3 text-gray-400 text-xs">2001</span>
+                {workShift.key}
+                <span className="ml-3 text-gray-400 text-xs">
+                  {workShift.doc_count}
+                </span>
               </li>
             ))}
           </ul>

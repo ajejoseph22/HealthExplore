@@ -94,5 +94,5 @@ export default async (req, res) => {
   await new Promise((resolve) => setTimeout(resolve, 1000 * Math.random()));
 
   res.statusCode = 200;
-  res.json({ result: groupBy(sortedResult, (job) => job.name) });
+  res.json(groupBy(sortedResult, (job) => job.name));
 };

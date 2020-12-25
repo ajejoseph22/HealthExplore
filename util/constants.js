@@ -1,3 +1,5 @@
+export const apiUrl = "http://localhost:3000/api";
+
 export const sortType = {
   ASC: "asc",
   DESC: "desc",
@@ -16,26 +18,11 @@ export const hidden = "hidden";
 
 export const emptyString = "";
 
-export const shifts = ["Night Shift", "Day Shift"];
-
-export const experience = ["Intermediate", "Senior", "Internship", "Junior"];
-
-export const departments = [
-  "Anesthesiology & Perioperative Medicine",
-  "Orthopaedic Surgery",
-  "Pediatrics",
-  "Ophthalmology",
-  "Neurosurgery",
-  "Pathology & Laboratory Medicine",
-  "Medicine",
-  "Neurology",
-  "Family Medicine",
-  "Head and Neck Surgery",
-  "Radiation Oncology",
-  "Dental Services",
-  "Rehabilitation Services",
-];
-
 export const departmentSeparator = ", ";
 
-export const jobTypes = ["Per-diem", "Traveler", "Part-time", "Full-time"];
+export const filterMap = {
+  jobType: "job_type",
+  workSchedule: "work_schedule",
+  experience: "experience",
+  department: "department",
+};

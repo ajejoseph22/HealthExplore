@@ -9,7 +9,7 @@ import {
   sortType,
 } from "../../util/constants";
 
-export function Jobs({ updatedJobs, isLoading }) {
+export function Jobs({ jobs, isLoading }) {
   const [clicked, setClicked] = React.useState({});
   const leafRefs = React.useRef([]);
 
@@ -18,7 +18,6 @@ export function Jobs({ updatedJobs, isLoading }) {
     color: !clicked[key] ? "black" : "#add8e6",
   });
 
-  const fetchedJobs = updatedJobs;
   return (
     <HomeContext.Consumer>
       {({ setSortingOptions }) =>
@@ -27,8 +26,8 @@ export function Jobs({ updatedJobs, isLoading }) {
             <div className="flex justify-between mb-8 item-center">
               <h5>
                 <span className="font-bold text-sm">
-                  {Object.keys(fetchedJobs).reduce((acc, key) => {
-                    acc += fetchedJobs[key].length;
+                  {Object.keys(jobs).reduce((acc, key) => {
+                    acc += jobs[key].length;
                     return acc;
                   }, 0)}
                 </span>{" "}
@@ -67,7 +66,7 @@ export function Jobs({ updatedJobs, isLoading }) {
                 ))}
               </ul>
             </div>
-            {Object.keys(updatedJobs).map((key, i) => (
+            {Object.keys(jobs).map((key, i) => (
               <div className="my-2.5 border-b" key={i}>
                 <div
                   style={{ cursor: "pointer" }}
@@ -84,14 +83,14 @@ export function Jobs({ updatedJobs, isLoading }) {
                     {getFirstTwoLetters(key)}
                   </p>
                   <span className="text-xs">
-                    {updatedJobs[key].length} jobs for {key}
+                    {jobs[key].length} jobs for {key}
                   </span>
                 </div>
                 <div
                   ref={(el) => (leafRefs.current[key] = el)}
                   className={hidden}
                 >
-                  {updatedJobs[key].map((item) => (
+                  {jobs[key].map((item) => (
                     <div key={item.job_id}>
                       <div
                         className="py-2 border-t"
