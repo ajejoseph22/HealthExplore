@@ -4,6 +4,7 @@ import Navbar from "../components/navbar";
 import SearchBar from "../components/searchbar";
 import Main from "../components/main";
 import { emptyString } from "../util/constants";
+import Footer from "../components/footer";
 
 export const HomeContext = React.createContext({
   setFilter: () => {},
@@ -53,7 +54,7 @@ const Home = (props) => {
           query={query}
           {...props}
         />
-        <footer />
+        <Footer />
       </div>
     </HomeContext.Provider>
   );
