@@ -1,65 +1,79 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import React from "react";
+import Head from "next/head";
+import Navbar from "../components/navbar";
+import SearchBar from "../components/searchbar";
+import Main from "../components/main";
+import { apiUrl, emptyString } from "../util/constants";
+import Footer from "../components/footer";
+import axios from "axios";
 
-export default function Home() {
+export const HomeContext = React.createContext({
+  setFilter: () => {},
+  setSortingOptions: () => {},
+});
+
+const Home = ({ jobs, appFilters }) => {
+  const [query, setQuery] = React.useState(emptyString);
+  const [filters, setFilters] = React.useState({});
+  const [sortingOptions, setSortingOptions] = React.useState({});
+
+  const handleSetQuery = (query) => {
+    setQuery(query);
+  };
+
+  const handleSetFilters = (filtersObj) => {
+    setFilters({ ...filters, ...filtersObj });
+  };
+
+  const handleSetSortingOptions = (sortingOptionsObj) => {
+    setSortingOptions({ ...sortingOptions, ...sortingOptionsObj });
+  };
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <HomeContext.Provider
+      value={{
+        appFilters,
+        setFilter: (filterObj) => handleSetFilters(filterObj),
+        setSortingOptions: (sortingOptionsObj) =>
+          handleSetSortingOptions(sortingOptionsObj),
+      }}
+    >
+      <div>
+        <Head>
+          <title>Health Explore</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <Navbar />
+        <SearchBar
+          setSorting={handleSetSortingOptions}
+          setFilters={handleSetFilters}
+          setQuery={handleSetQuery}
+        />
+        <Main
+          sortingOptions={sortingOptions}
+          filters={filters}
+          query={query}
+          jobs={jobs}
+        />
+        <Footer />
+      </div>
+    </HomeContext.Provider>
+  );
+};
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+Home.getInitialProps = async () => {
+  const res = await Promise.all([
+    axios.get(`${apiUrl}/jobs`),
+    axios.get(`${apiUrl}/filters`),
+  ]);
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+  const [jobs, filters] = res;
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+  return {
+    jobs: jobs.data,
+    appFilters: filters.data,
+  };
+};
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
-}
+export default Home;
