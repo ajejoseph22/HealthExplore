@@ -1,2 +1,4 @@
 .next/
 postcss.config.js
+jest.config.js
+.babelrc

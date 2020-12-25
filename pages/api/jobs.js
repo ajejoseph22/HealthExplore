@@ -2,6 +2,7 @@
 import jobs from "../../data/jobs.json";
 import FuzzySearch from "fuzzy-search";
 import groupBy from "lodash.groupby";
+import sort from "fast-sort";
 
 const applyFilter = (result, jobType, department, workShift, experience) => {
   let newResult = jobType
@@ -61,24 +62,31 @@ export default async (req, res) => {
     experience
   );
 
-  const { sortedResult } = await (
-    await fetch("http://localhost:3000/api/sort", {
-      method: "POST",
-      body: JSON.stringify({
-        payload: filteredResult,
-        criteria: {
-          location: locationSort,
-          education: educationSort,
-          role: roleSort,
-          experience: experienceSort,
-          department: departmentSort,
-        },
-      }),
-      headers: {
-        "Content-type": "application/json",
-      },
-    })
-  ).json();
+  const sortParamsMap = {
+    location: "county",
+    role: "job_title",
+    experience: "experience",
+    department: "department",
+    education: "required_credentials",
+  };
+
+  const criteria = {
+    location: locationSort,
+    education: educationSort,
+    role: roleSort,
+    experience: experienceSort,
+    department: departmentSort,
+  };
+
+  const sortedResult = sort(filteredResult).by(
+    Object.keys(criteria).reduce((acc, key) => {
+      if (criteria[key]) {
+        acc.push({ [criteria[key]]: (job) => job[sortParamsMap[key]] });
+      }
+
+      return acc;
+    }, [])
+  );
 
   // this timeout emulates unstable network connection, do not remove this one
   // you need to figure out how to guarantee that client side will render
