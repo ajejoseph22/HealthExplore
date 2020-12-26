@@ -25,7 +25,7 @@
 
 * Run `npm run build`
 
-## To serve the pruduction build:
+## To serve the production build:
 
 * Run `npm start`
 
